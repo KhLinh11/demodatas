@@ -1,0 +1,1953 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vitara Data Platform - Enterprise Data Processing & Business Intelligence</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            pastel: {
+              lavender: '#ECD8F2',
+              deepPurple: '#8F60BF',
+              periwinkle: '#BEB6F2',
+              skyBlue: '#079DD9',
+              pastelCyan: '#99D9F2',
+              canvas: '#FAF6FC',
+              cardBg: '#FFFFFF',
+              borderLine: '#ECD8F2',
+              textDark: '#1E1233',
+              textMuted: '#6E5D80'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #FAF6FC;
+      color: #1E1233;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #BEB6F2;
+      border-radius: 9999px;
+    }
+    .panel-shadow {
+      box-shadow: 0 4px 20px -2px rgba(143, 96, 191, 0.08);
+    }
+    .clay-card {
+      background: #ffffff;
+      border: 1.5px solid #ECD8F2;
+      box-shadow: 8px 8px 24px rgba(143, 96, 191, 0.08), -6px -6px 16px #ffffff;
+    }
+    .subtab-active {
+      border-bottom: 2.5px solid #8F60BF;
+      color: #8F60BF;
+      font-weight: 700;
+    }
+    .subtab-inactive {
+      color: #6E5D80;
+      border-bottom: 2.5px solid transparent;
+    }
+    .subtab-inactive:hover {
+      color: #1E1233;
+    }
+  </style>
+</head>
+<body class="selection:bg-[#ECD8F2] selection:text-[#8F60BF]">
+
+  <!-- ======================================================== -->
+  <!-- MÀN HÌNH BÌA HERO B2B SAAS ENTERPRISE (PASTEL PALETTE CHUẨN) -->
+  <!-- ======================================================== -->
+  <section id="view-hero" class="relative min-h-screen flex flex-col justify-between px-8 sm:px-14 py-8 border-b border-[#ECD8F2] bg-[#FAF6FC] overflow-hidden">
+    
+    <!-- HEADER BÌA CHUẨN TỶ LỆ HÌNH MẪU -->
+    <header class="w-full max-w-7xl mx-auto flex items-center justify-between pb-4 z-20">
+      <div class="flex items-center space-x-3">
+        <!-- Logo bo góc mềm sử dụng màu tím đậm #8F60BF -->
+        <div class="px-4 py-2.5 rounded-2xl bg-[#8F60BF] text-white flex items-center justify-center font-extrabold text-sm tracking-tight shadow-md">
+          <span>vitara<br class="hidden">data*</span>
+        </div>
+      </div>
+
+      <div class="text-[11px] font-mono tracking-widest text-[#6E5D80] uppercase font-bold">
+        DATA INTELLIGENCE · DECISION SYSTEM
+      </div>
+    </header>
+
+    <!-- KHỐI NỘI DUNG CHÍNH CHUẨN CẤU TRÚC ẢNH MẪU -->
+    <div class="w-full max-w-7xl mx-auto my-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center py-4 z-20">
+      
+      <!-- CỘT TRÁI: TEXT THEO ĐÚNG CẤU TRÚC MARKDAO PHỐI MÀU PASTEL -->
+      <div class="lg:col-span-7 space-y-6">
+        
+        <!-- Eyebrow nhỏ màu xanh dương tươi #079DD9 -->
+        <div class="text-[12px] font-mono font-extrabold uppercase tracking-widest text-[#079DD9]">
+          VITARA B2B DECISION PLATFORM
+        </div>
+
+        <!-- Tiêu đề lớn 2 nhịp đanh thép -->
+        <h1 class="text-4xl sm:text-5xl lg:text-[58px] font-extrabold text-[#1E1233] tracking-tight leading-[1.12]">
+          Không bắt đầu từ <br>
+          doanh thu ảo. <br>
+          <span class="text-[#079DD9]">Bắt đầu từ điểm đau của</span> <br>
+          <span class="relative inline-block text-[#1E1233]">
+            P&L.
+            <span class="absolute bottom-2 left-0 w-full h-[12px] bg-[#99D9F2] -z-10 rounded-full opacity-80"></span>
+          </span>
+        </h1>
+
+        <!-- Đoạn mô tả theo đúng cấu trúc ảnh -->
+        <p class="text-sm sm:text-base text-[#6E5D80] max-w-xl font-normal leading-relaxed">
+          Biến giao dịch phân tán thành dữ liệu sạch, bóc tách hoàn trả trễ, đo lường lợi nhuận thực tế và đề xuất ngân sách có thể đo lường.
+        </p>
+
+        <!-- Hàng nút thẻ Pill Tags bo tròn viền pastel chuẩn ảnh -->
+        <div class="flex flex-wrap items-center gap-2.5 pt-1">
+          <span class="px-4 py-1.5 rounded-full bg-white border border-[#BEB6F2] text-[#8F60BF] text-[11px] font-bold tracking-wider uppercase shadow-xs">
+            DEDUPLICATION
+          </span>
+          <span class="px-4 py-1.5 rounded-full bg-white border border-[#BEB6F2] text-[#8F60BF] text-[11px] font-bold tracking-wider uppercase shadow-xs">
+            CLEANSING
+          </span>
+          <span class="px-4 py-1.5 rounded-full bg-white border border-[#BEB6F2] text-[#8F60BF] text-[11px] font-bold tracking-wider uppercase shadow-xs">
+            SLA RETURNS
+          </span>
+          <span class="px-4 py-1.5 rounded-full bg-white border border-[#BEB6F2] text-[#8F60BF] text-[11px] font-bold tracking-wider uppercase shadow-xs">
+            HITL AUDIT
+          </span>
+          <span class="px-4 py-1.5 rounded-full bg-white border border-[#BEB6F2] text-[#8F60BF] text-[11px] font-bold tracking-wider uppercase shadow-xs">
+            PNL 12 DÒNG
+          </span>
+        </div>
+
+        <!-- Cặp nút bấm thực thi chuyển tiếp phối màu pastel -->
+        <div class="flex flex-col sm:flex-row items-center gap-3 pt-3">
+          <button onclick="startWorkflowAtStep1()" class="w-full sm:w-auto px-7 py-3.5 rounded-2xl bg-[#8F60BF] hover:bg-[#7b4fa8] text-white font-bold text-xs uppercase tracking-wider transition shadow-lg hover:shadow-xl hover:scale-105 flex items-center justify-center space-x-2">
+            <span>Bắt Đầu Quy Trình Xử Lý Dữ Liệu</span>
+            <i class="fa-solid fa-arrow-right text-xs text-[#99D9F2]"></i>
+          </button>
+          <button onclick="jumpToStep5Report()" class="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-[#ECD8F2] hover:bg-[#e4caec] text-[#8F60BF] border border-[#BEB6F2] font-bold text-xs transition flex items-center justify-center space-x-2 shadow-xs">
+            <span>Xem Trực Tiếp Báo Cáo P&L (Bước 5)</span>
+            <i class="fa-solid fa-chart-simple text-xs text-[#079DD9]"></i>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- CỘT PHẢI: KHỐI MINH HỌA 3D CLAYMORPHISM 100% THEO 5 MÃ MÀU PASTEL -->
+      <div class="lg:col-span-5 relative flex items-center justify-center">
+        <div class="w-full max-w-[480px] aspect-[1.15/1] relative flex items-center justify-center">
+          
+          <svg class="w-full h-full drop-shadow-[0_20px_35px_rgba(143,96,191,0.14)]" viewBox="0 0 500 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <!-- Gradients chuẩn 5 mã màu: #ECD8F2, #8F60BF, #BEB6F2, #079DD9, #99D9F2 -->
+              <linearGradient id="clayCardBg" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FFFFFF" />
+                <stop offset="100%" stop-color="#F7EDFB" />
+              </linearGradient>
+              <linearGradient id="blueBarGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#079DD9" />
+                <stop offset="100%" stop-color="#057DB0" />
+              </linearGradient>
+              <linearGradient id="cyanBarGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#99D9F2" />
+                <stop offset="100%" stop-color="#72C4E5" />
+              </linearGradient>
+              <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#BEB6F2" />
+                <stop offset="100%" stop-color="#8F60BF" />
+              </linearGradient>
+              <filter id="clayShadow" x="-10%" y="-10%" width="130%" height="130%">
+                <feDropShadow dx="8" dy="12" stdDeviation="10" flood-color="#8F60BF" flood-opacity="0.14" />
+              </filter>
+              <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#079DD9" flood-opacity="0.3" />
+              </filter>
+            </defs>
+
+            <!-- 1. BẢNG TRÌNH DUYỆT DASHBOARD CHÍNH (NỀN SAU) -->
+            <rect x="30" y="70" width="280" height="230" rx="28" fill="url(#clayCardBg)" stroke="#ECD8F2" stroke-width="3" filter="url(#clayShadow)" />
+            
+            <!-- Thanh header trình duyệt & 3 chấm tròn pastel -->
+            <path d="M 30 98 Q 30 70 58 70 L 282 70 Q 310 70 310 98 L 310 102 L 30 102 Z" fill="#FFFFFF" />
+            <line x1="30" y1="102" x2="310" y2="102" stroke="#ECD8F2" stroke-width="2" />
+            <circle cx="55" cy="86" r="5" fill="#ECD8F2" />
+            <circle cx="72" cy="86" r="5" fill="#BEB6F2" />
+            <circle cx="89" cy="86" r="5" fill="#99D9F2" />
+
+            <!-- Khung tìm kiếm / Ô gõ query mô phỏng trong Dashboard -->
+            <rect x="115" y="76" width="165" height="20" rx="10" fill="#FAF6FC" stroke="#ECD8F2" stroke-width="1.5" />
+            <circle cx="265" cy="86" r="4" stroke="#079DD9" stroke-width="2" fill="none" />
+            <line x1="268" y1="89" x2="273" y2="94" stroke="#079DD9" stroke-width="2" stroke-linecap="round" />
+
+            <!-- Nội dung mô phỏng bên trong Dashboard: Khối ảnh & các dòng dữ liệu -->
+            <rect x="55" y="125" width="105" height="70" rx="16" fill="#FAF6FC" stroke="#99D9F2" stroke-width="2" />
+            <path d="M 68 180 L 88 152 L 105 170 L 122 145 L 148 180 Z" fill="#99D9F2" opacity="0.7" />
+            <circle cx="82" cy="144" r="7" fill="#079DD9" opacity="0.85" />
+
+            <rect x="175" y="130" width="110" height="10" rx="5" fill="#BEB6F2" />
+            <rect x="175" y="150" width="85" height="8" rx="4" fill="#ECD8F2" />
+            <rect x="175" y="168" width="100" height="8" rx="4" fill="#ECD8F2" />
+            <rect x="175" y="186" width="60" height="8" rx="4" fill="#F4E9F7" />
+
+            <!-- Đường ống dẫn dữ liệu (Pipeline) uốn lượn phong cách Claymorphism -->
+            <path d="M 120 280 C 120 340, 240 330, 280 340 S 330 360, 370 330" fill="none" stroke="#BEB6F2" stroke-width="10" stroke-linecap="round" />
+            <circle cx="170" cy="318" r="9" fill="#079DD9" stroke="#ffffff" stroke-width="3" />
+            <circle cx="275" cy="336" r="13" fill="#99D9F2" stroke="#ffffff" stroke-width="3" />
+
+            <!-- 2. THẺ KIỂM TOÁN HITL CHÍNH GIỮA (THẺ PROFILE CÓ DẤU TICK XANH) -->
+            <g transform="translate(180, 160)" filter="url(#clayShadow)">
+              <!-- Khối thẻ đứng viền bo tròn lớn -->
+              <rect x="0" y="0" width="125" height="175" rx="26" fill="#ffffff" stroke="#ECD8F2" stroke-width="3" />
+              
+              <!-- Avatar người kiểm toán HITL 3D -->
+              <circle cx="62" cy="46" r="24" fill="#079DD9" />
+              <path d="M 44 82 C 44 68, 80 68, 80 82 Z" fill="#079DD9" />
+              
+              <!-- Dấu Tick xanh tươi chứng thực HITL #1 -->
+              <circle cx="88" cy="62" r="13" fill="#079DD9" filter="url(#softGlow)" />
+              <path d="M 83 62 L 87 66 L 94 58" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+
+              <!-- Các dòng chỉ số kiểm toán -->
+              <rect x="24" y="98" width="77" height="10" rx="5" fill="#8F60BF" opacity="0.9" />
+              <rect x="24" y="118" width="60" height="7" rx="3.5" fill="#BEB6F2" />
+              
+              <!-- 3 chấm trạng thái dưới thẻ chuẩn 3 màu pastel -->
+              <circle cx="34" cy="144" r="4" fill="#8F60BF" />
+              <circle cx="48" cy="144" r="4" fill="#079DD9" />
+              <circle cx="62" cy="144" r="4" fill="#99D9F2" />
+            </g>
+
+            <!-- 3. PHỄU LỌC DỮ LIỆU ĐA KÊNH (FUNNEL) NẰM GIỮA -->
+            <g transform="translate(235, 120)" filter="url(#clayShadow)">
+              <circle cx="28" cy="28" r="26" fill="#ffffff" stroke="#ECD8F2" stroke-width="2" />
+              <path d="M 17 18 L 39 18 L 31 29 L 31 38 L 25 35 L 25 29 Z" fill="#079DD9" stroke="#079DD9" stroke-width="1.5" stroke-linejoin="round" />
+            </g>
+
+            <!-- 4. KHỐI BIỂU ĐỒ CỘT 3D TĂNG TRƯỞNG & BIA NGẮM (BÊN PHẢI) -->
+            <g transform="translate(305, 110)" filter="url(#clayShadow)">
+              <!-- Thẻ bảng đồ thị -->
+              <rect x="0" y="0" width="165" height="205" rx="28" fill="#ffffff" stroke="#ECD8F2" stroke-width="3" />
+              
+              <!-- Mũi tên tăng trưởng cong 3D màu xanh dương tươi #079DD9 -->
+              <path d="M 22 135 C 50 120, 85 90, 132 40" fill="none" stroke="#079DD9" stroke-width="6" stroke-linecap="round" />
+              <path d="M 115 38 L 135 38 L 135 58" fill="none" stroke="#079DD9" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+
+              <!-- Các cột biểu đồ tăng trưởng 4 màu pastel chuẩn -->
+              <rect x="24" y="145" width="18" height="35" rx="7" fill="#8F60BF" />
+              <rect x="49" y="125" width="18" height="55" rx="7" fill="#BEB6F2" />
+              <rect x="74" y="100" width="18" height="80" rx="7" fill="url(#cyanBarGrad)" />
+              <rect x="99" y="72" width="18" height="108" rx="7" fill="url(#blueBarGrad)" filter="url(#softGlow)" />
+            </g>
+
+            <!-- 5. BIA MỤC TIÊU ROI TĂNG TRƯỞNG (GÓC TRÊN BÊN PHẢI) -->
+            <g transform="translate(415, 45)" filter="url(#clayShadow)">
+              <circle cx="36" cy="36" r="36" fill="#ffffff" stroke="#ECD8F2" stroke-width="3" />
+              <circle cx="36" cy="36" r="27" fill="none" stroke="#079DD9" stroke-width="6" />
+              <circle cx="36" cy="36" r="14" fill="#079DD9" />
+              <circle cx="36" cy="36" r="6" fill="#ffffff" />
+              <!-- Mũi tên xanh tick vào hồng tâm bia -->
+              <circle cx="58" cy="56" r="12" fill="#8F60BF" filter="url(#softGlow)" />
+              <path d="M 53 56 L 57 60 L 63 53" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+            </g>
+          </svg>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- DÒNG BẢO CHỨNG CHÂN TRANG ĐÚNG PHONG CÁCH MARKDAO -->
+    <footer class="w-full max-w-7xl mx-auto pt-4 border-t border-[#ECD8F2] z-20 flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#6E5D80] gap-2">
+      <div class="font-medium">
+        Đặc tả năng lực nền tảng: <strong class="text-[#1E1233] font-semibold">Chuẩn hóa dữ liệu đa nguồn quy mô lớn · Tự động khử trùng lặp đa chạm · Kiểm soát 5 véc-tơ rủi ro dòng tiền · 100% cân bằng số học kế toán</strong>
+      </div>
+      <div class="flex items-center space-x-2 text-[10px] text-[#6E5D80]">
+        <span class="w-2 h-2 rounded-full bg-[#079DD9] animate-pulse"></span>
+        <span class="font-mono uppercase font-bold text-[#8F60BF]">ENTERPRISE PRODUCTION READY</span>
+      </div>
+    </footer>
+
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- WORKSPACE 5 BƯỚC PHỐI MÀU PASTEL ĐỒNG BỘ 100% -->
+  <!-- ======================================================== -->
+  <section id="view-workspace" class="hidden p-2 sm:p-4 md:p-6 min-h-screen flex items-center justify-center">
+
+  <div class="w-full max-w-[1540px] bg-white rounded-3xl shadow-xl overflow-hidden flex min-h-[94vh] border border-[#ECD8F2] relative">
+
+    <!-- CỘT TRÁI: QUY TRÌNH (STICKY SIDEBAR 5 BƯỚC) -->
+    <aside class="w-72 bg-[#FAF6FC] border-r border-[#ECD8F2] p-6 flex flex-col justify-between flex-shrink-0">
+      <div class="space-y-6">
+        
+        <div class="flex items-center space-x-3 pb-4 border-b border-[#ECD8F2]">
+          <button onclick="backToHero()" class="w-9 h-9 rounded-xl bg-[#8F60BF] hover:bg-[#7b4fa8] text-white flex items-center justify-center font-bold text-base shadow-sm transition" title="Quay lại bìa giới thiệu">
+            V
+          </button>
+          <div>
+            <div class="flex items-center space-x-1.5">
+              <span class="text-sm font-extrabold tracking-tight text-[#1E1233]">Vitara Platform</span>
+              <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#ECD8F2] text-[#8F60BF]">B2B SaaS</span>
+            </div>
+            <p class="text-[11px] text-[#6E5D80]">Enterprise Data Intelligence</p>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between">
+          <div class="text-[11px] font-bold tracking-wider text-[#6E5D80] uppercase">
+            Quy trình giải pháp (5 bước)
+          </div>
+          <button onclick="backToHero()" class="text-[10px] text-[#079DD9] font-bold hover:underline">
+            &larr; Về Bìa Web
+          </button>
+        </div>
+
+        <!-- 5 Nút Bước Chuẩn Theo Quy Trình -->
+        <nav class="space-y-2">
+          
+          <button onclick="switchStep(1)" id="step-nav-1" class="w-full text-left p-3 rounded-2xl flex items-center justify-between border transition bg-white border-[#ECD8F2] hover:border-[#8F60BF]">
+            <div class="flex items-center space-x-3">
+              <div class="w-8 h-8 rounded-xl bg-[#ECD8F2] text-[#8F60BF] flex items-center justify-center text-xs">
+                <i class="fa-solid fa-network-wired"></i>
+              </div>
+              <div>
+                <div class="text-xs font-bold text-[#1E1233]">1. Tích hợp nguồn</div>
+                <div class="text-[10px] text-[#6E5D80]">POS, ERP, Sàn, Sheets</div>
+              </div>
+            </div>
+            <i class="fa-solid fa-check text-xs text-[#079DD9]" id="step-check-1"></i>
+          </button>
+
+          <button onclick="switchStep(2)" id="step-nav-2" class="w-full text-left p-3 rounded-2xl flex items-center justify-between border transition bg-white border-[#ECD8F2] hover:border-[#8F60BF]">
+            <div class="flex items-center space-x-3">
+              <div class="w-8 h-8 rounded-xl bg-[#ECD8F2] text-[#8F60BF] flex items-center justify-center text-xs">
+                <i class="fa-solid fa-broom-ball"></i>
+              </div>
+              <div>
+                <div class="text-xs font-bold text-[#1E1233]">2. Chuẩn hoá dữ liệu</div>
+                <div class="text-[10px] text-[#6E5D80]">Định dạng, công thức, gian lận</div>
+              </div>
+            </div>
+            <i class="fa-solid fa-check text-xs text-[#079DD9]" id="step-check-2"></i>
+          </button>
+
+          <button onclick="switchStep(3)" id="step-nav-3" class="w-full text-left p-3 rounded-2xl flex items-center justify-between border transition bg-white border-[#ECD8F2] hover:border-[#8F60BF]">
+            <div class="flex items-center space-x-3">
+              <div class="w-8 h-8 rounded-xl bg-[#ECD8F2] text-[#8F60BF] flex items-center justify-center text-xs">
+                <i class="fa-solid fa-stethoscope"></i>
+              </div>
+              <div>
+                <div class="text-xs font-bold text-[#1E1233]">3. Chẩn đoán rủi ro</div>
+                <div class="text-[10px] text-[#6E5D80]">SLA trễ, chồng voucher, tồn ảo</div>
+              </div>
+            </div>
+            <i class="fa-solid fa-check text-xs text-[#079DD9]" id="step-check-3"></i>
+          </button>
+
+          <button onclick="switchStep(4)" id="step-nav-4" class="w-full text-left p-3 rounded-2xl flex items-center justify-between border transition bg-white border-[#ECD8F2] hover:border-[#8F60BF]">
+            <div class="flex items-center space-x-3">
+              <div class="w-8 h-8 rounded-xl bg-[#ECD8F2] text-[#8F60BF] flex items-center justify-center text-xs">
+                <i class="fa-solid fa-sliders"></i>
+              </div>
+              <div>
+                <div class="text-xs font-bold text-[#1E1233]">4. Mô phỏng & Duyệt luật</div>
+                <div class="text-[10px] text-[#6E5D80]">HITL #1 · Phân bổ & Audit</div>
+              </div>
+            </div>
+            <i class="fa-solid fa-check text-xs text-[#079DD9]" id="step-check-4"></i>
+          </button>
+
+          <button onclick="switchStep(5)" id="step-nav-5" class="w-full text-left p-3 rounded-2xl flex items-center justify-between border transition bg-[#ECD8F2] border-[#8F60BF] shadow-sm">
+            <div class="flex items-center space-x-3">
+              <div class="w-8 h-8 rounded-xl bg-[#8F60BF] text-white flex items-center justify-center text-xs shadow-sm">
+                <i class="fa-solid fa-chart-pie"></i>
+              </div>
+              <div>
+                <div class="text-xs font-bold text-[#8F60BF]">5. Báo cáo & Đề xuất</div>
+                <div class="text-[10px] text-[#079DD9] font-medium">5 Loại Dashboard & P&L</div>
+              </div>
+            </div>
+            <i class="fa-solid fa-chevron-right text-xs text-[#8F60BF]"></i>
+          </button>
+
+        </nav>
+
+        <div class="p-3.5 rounded-2xl bg-white border border-[#ECD8F2] text-xs space-y-2">
+          <div class="flex items-center justify-between text-[#6E5D80] text-[10px] uppercase font-bold tracking-wider">
+            <span>Mô hình doanh nghiệp khách</span>
+            <span class="w-2 h-2 rounded-full bg-[#079DD9]"></span>
+          </div>
+          <select id="enterprise-preset-select" onchange="applyIndustryPreset(this.value)" class="w-full bg-[#FAF6FC] border border-[#BEB6F2] rounded-xl px-2.5 py-1.5 text-xs font-bold text-[#1E1233] focus:outline-none">
+            <option value="retail" selected>Chuỗi Bán Lẻ Tiêu Dùng (Omnichannel)</option>
+            <option value="fnb">Tập Đoàn F&B / Chuỗi Nhà Hàng (SLA 3d)</option>
+            <option value="fashion">Thương Hiệu Thời Trang & Phụ Kiện (SLA 7d)</option>
+            <option value="ecommerce">D2C & Sàn Thương Mại Điện Tử (SLA 15d)</option>
+            <option value="custom">Doanh nghiệp Tùy biến linh hoạt...</option>
+          </select>
+          <div class="flex justify-between items-center text-[11px] text-[#6E5D80] pt-1 border-t border-[#ECD8F2]">
+            <span>Chính sách kiểm soát:</span>
+            <span id="sla-display-badge" class="font-bold font-mono text-[#8F60BF]">SLA 12d nội bộ → Quét 30d AI</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="pt-4 border-t border-[#ECD8F2] space-y-2">
+        <button onclick="toggleAgentDrawer()" class="w-full py-2.5 px-4 rounded-xl bg-[#8F60BF] hover:bg-[#7b4fa8] text-white text-xs font-bold transition flex items-center justify-center space-x-2 shadow-sm">
+          <i class="fa-solid fa-robot text-[#99D9F2]"></i>
+          <span>Trợ Lý Cố Vấn Tăng Trưởng AI</span>
+        </button>
+        <button onclick="handleResetWorkflow()" class="w-full py-1.5 text-[11px] text-[#6E5D80] hover:text-[#1E1233] transition text-center block">
+          Khởi tạo phiên dữ liệu mới
+        </button>
+      </div>
+    </aside>
+
+    <!-- CỘT PHẢI: KHUNG NỘI DUNG CHÍNH (BODY BÁO CÁO KINH DOANH) -->
+    <main class="flex-1 overflow-y-auto custom-scrollbar p-8 space-y-7 bg-white">
+
+      <!-- BƯỚC 1: TÍCH HỢP NGUỒN DỮ LIỆU -->
+      <div id="step-panel-1" class="hidden space-y-5">
+        <div class="border-b border-[#ECD8F2] pb-4">
+          <h2 class="text-2xl font-bold text-[#1E1233]">Bước 1: Tích hợp nguồn dữ liệu doanh nghiệp</h2>
+          <p class="text-xs text-[#6E5D80] mt-1">Kết nối tức thì từ các hệ thống bán hàng POS, ERP, CRM, sàn TMĐT (Shopee, TikTok, Lazada) hoặc tập tin bảng tính phẳng.</p>
+        </div>
+
+        <div id="format-alert-box" class="hidden p-4 rounded-2xl border text-xs leading-relaxed transition-all"></div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div class="p-6 rounded-2xl bg-[#FAF6FC] border border-[#ECD8F2] space-y-3">
+            <span class="text-xs font-bold text-[#1E1233] uppercase tracking-wider block">Cách 1: Nạp tệp dữ liệu phẳng (Excel / CSV)</span>
+            <div class="border-2 border-dashed border-[#BEB6F2] hover:border-[#8F60BF] bg-white rounded-2xl p-6 text-center cursor-pointer transition relative">
+              <input type="file" id="input-file" accept=".csv, .xlsx, *.*" onchange="handleFileSelected(event)" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full">
+              <i class="fa-solid fa-cloud-arrow-up text-3xl text-[#079DD9] mb-2"></i>
+              <div class="text-xs font-bold text-[#1E1233]">Kéo thả file giao dịch bán hàng hoặc click chọn file</div>
+              <div class="text-[10px] text-[#6E5D80] mt-1">Hỗ trợ: <strong>.csv</strong> hoặc <strong>.xlsx</strong> (Không giới hạn dung lượng)</div>
+            </div>
+            <div class="flex flex-wrap justify-between items-center gap-2 text-[11px] text-[#6E5D80] pt-1">
+              <button onclick="loadSampleRetailDirect()" class="text-[#079DD9] font-bold hover:underline flex items-center space-x-1">
+                <span>⚡ Nạp bộ dữ liệu mẫu bán lẻ (15.000 dòng)</span>
+              </button>
+              <button onclick="downloadSampleDatasetCSV()" class="text-[#8F60BF] font-bold hover:underline flex items-center space-x-1">
+                <i class="fa-solid fa-download text-[10px]"></i>
+                <span>Tải tệp mẫu đối soát (.CSV)</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-[#FAF6FC] border border-[#ECD8F2] space-y-3">
+            <span class="text-xs font-bold text-[#1E1233] uppercase tracking-wider block">Cách 2: Đồng bộ từ API / Google Sheets / POS</span>
+            <div class="space-y-3">
+              <input type="text" id="input-api-url" placeholder="https://docs.google.com/spreadsheets/d/... hoặc POS API Endpoint" class="w-full bg-white border border-[#BEB6F2] rounded-xl px-3.5 py-2.5 text-xs focus:ring-2 focus:ring-[#8F60BF] focus:outline-none">
+              <button onclick="handleConnectExternalSource()" class="w-full py-2.5 bg-[#8F60BF] hover:bg-[#7b4fa8] text-white rounded-xl text-xs font-bold transition shadow-sm">
+                Kết Nối & Đồng Bộ Dữ Liệu
+              </button>
+            </div>
+            <p class="text-[11px] text-[#6E5D80] italic">Hỗ trợ webhook tự động cập nhật đơn hàng theo thời gian thực.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- BƯỚC 2: CHUẨN HOÁ DỮ LIỆU -->
+      <div id="step-panel-2" class="hidden space-y-6">
+        <div class="border-b border-[#ECD8F2] pb-4 flex justify-between items-center">
+          <div>
+            <h2 class="text-2xl font-bold text-[#1E1233]">Bước 2: Khảo sát chất lượng & Đề xuất chuẩn hoá dữ liệu</h2>
+            <p class="text-xs text-[#6E5D80] mt-1">AI Agent đã quét toàn bộ tệp dữ liệu, phân loại 4 nhóm lỗi và lập phương án khắc phục. Cần người quản trị phê duyệt trước khi xử lý.</p>
+          </div>
+          <div class="flex items-center space-x-3">
+            <span id="cleansing-status-pill" class="px-3 py-1 rounded-full text-xs font-bold bg-[#ECD8F2] text-[#8F60BF] border border-[#BEB6F2] flex items-center space-x-1.5">
+              <i class="fa-solid fa-clock-rotate-left text-[11px]"></i>
+              <span>Chờ người dùng phê duyệt</span>
+            </span>
+            <button id="btn-proceed-step3" onclick="handleProceedToStep3()" class="px-5 py-2.5 bg-[#BEB6F2] text-white rounded-xl text-xs font-bold transition flex items-center space-x-2 cursor-not-allowed opacity-70" title="Cần phê duyệt phương án chuẩn hoá trước khi tiếp tục" disabled>
+              <span>Tiếp tục Bước 3: Chẩn đoán rủi ro</span>
+              <i class="fa-solid fa-lock text-xs" id="lock-icon-step3"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- THÔNG BÁO TỔNG HỢP LỖI CẢNH BÁO TỪ AGENT (AUDIT ERROR BANNER) -->
+        <div class="p-4 rounded-2xl bg-[#ECD8F2]/60 border border-[#8F60BF] flex items-start space-x-3 text-xs">
+          <div class="w-8 h-8 rounded-xl bg-[#8F60BF] text-white flex items-center justify-center flex-shrink-0 mt-0.5">
+            <i class="fa-solid fa-triangle-exclamation text-xs"></i>
+          </div>
+          <div class="flex-1 space-y-1">
+            <div class="font-bold text-[#1E1233] flex items-center justify-between">
+              <span>Phát hiện 4 nhóm bất thường dữ liệu đe dọa tính toàn vẹn báo cáo tài chính</span>
+              <span class="text-[10px] font-mono bg-white px-2 py-0.5 rounded text-[#8F60BF] border border-[#BEB6F2]">CONFIDENCE: 99.4%</span>
+            </div>
+            <p class="text-[#6E5D80] leading-relaxed">
+              Nếu không làm sạch, tổng doanh thu ghi nhận sẽ bị phóng đại ảo thêm <strong>298.13M ₫</strong>, đồng thời sai lệch công thức tại 48 đơn hàng và 142 trường thiếu định dạng gây đứt gãy quan hệ dữ liệu. Dưới đây là phương án xử lý do Agent kiến nghị.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="p-4 rounded-2xl bg-[#FAF6FC] border border-[#ECD8F2] space-y-1">
+            <span class="text-[11px] font-bold text-[#6E5D80] uppercase">1. Lỗi định dạng & Thiếu trường</span>
+            <div class="text-xl font-bold font-mono text-[#8F60BF]">142 lỗi</div>
+            <p class="text-[10px] text-[#6E5D80]">Ngày tháng lệch chuẩn, SKU trống, ký tự rác</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-[#FAF6FC] border border-[#ECD8F2] space-y-1">
+            <span class="text-[11px] font-bold text-[#6E5D80] uppercase">2. Bất nhất số học & Công thức</span>
+            <div class="text-xl font-bold font-mono text-[#8F60BF]">48 đơn</div>
+            <p class="text-[10px] text-[#6E5D80]">Lỗi: Doanh thu thô - Chiết khấu ≠ Thực thu</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-[#FAF6FC] border border-[#ECD8F2] space-y-1">
+            <span class="text-[11px] font-bold text-[#6E5D80] uppercase">3. Dị thường & Spam Bot Voucher</span>
+            <div class="text-xl font-bold font-mono text-[#8F60BF]">62 đơn</div>
+            <p class="text-[10px] text-[#6E5D80]">Đơn 0đ, trùng IP đặt hàng liên tiếp, chiết khấu > 100%</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-[#ECD8F2] border border-[#BEB6F2] space-y-1">
+            <span class="text-[11px] font-bold text-[#8F60BF] uppercase">4. Doanh thu trùng lặp bóc tách</span>
+            <div class="text-xl font-bold font-mono text-[#079DD9]">298.13M ₫</div>
+            <p class="text-[10px] text-[#8F60BF] font-semibold">96 đơn tiếp xúc đa điểm chạm chéo</p>
+          </div>
+        </div>
+
+        <!-- BẢNG KHẢO SÁT CHI TIẾT & ĐỀ XUẤT CỦA AI CẦN PHÊ DUYỆT -->
+        <div class="p-6 rounded-3xl bg-white border border-[#ECD8F2] panel-shadow space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-[#ECD8F2]">
+            <div class="flex items-center space-x-2">
+              <span class="w-3 h-3 rounded-full bg-[#079DD9]"></span>
+              <h3 class="text-sm font-bold text-[#1E1233] uppercase tracking-wider">Hồ sơ khảo sát & Kế hoạch xử lý dữ liệu (Human Approval Gate)</h3>
+            </div>
+            <div class="flex items-center space-x-2">
+              <button onclick="toggleMissingDataPolicyModal()" class="px-3 py-1 rounded-xl bg-[#FAF6FC] border border-[#BEB6F2] text-[#8F60BF] hover:bg-[#ECD8F2] text-[11px] font-bold transition flex items-center space-x-1">
+                <i class="fa-solid fa-circle-info text-[#079DD9]"></i>
+                <span>Xem quy tắc xử lý dữ liệu thiếu (Imputation Policy)</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto border border-[#ECD8F2] rounded-2xl">
+            <table class="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr class="bg-[#FAF6FC] text-[#6E5D80] font-semibold border-b border-[#ECD8F2]">
+                  <th class="p-3">Chọn</th>
+                  <th class="p-3">Nhóm lỗi phát hiện</th>
+                  <th class="p-3 text-center">Số lượng</th>
+                  <th class="p-3">Tác động rủi ro nếu không sửa</th>
+                  <th class="p-3">Đề xuất phương án của AI Agent</th>
+                  <th class="p-3 text-right">Trạng thái</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-[#ECD8F2] text-[#1E1233]">
+                <tr class="hover:bg-[#FAF6FC]">
+                  <td class="p-3 text-center">
+                    <input type="checkbox" id="chk-clean-1" checked class="w-4 h-4 accent-[#8F60BF] rounded cursor-pointer">
+                  </td>
+                  <td class="p-3 font-bold text-[#1E1233]">
+                    Lỗi sai định dạng & Dữ liệu trống
+                  </td>
+                  <td class="p-3 text-center font-mono font-bold text-[#8F60BF]">142 trường</td>
+                  <td class="p-3 text-[#6E5D80]">Làm sai lệch báo cáo theo mốc thời gian và gãy liên kết nhóm hàng SKU</td>
+                  <td class="p-3 text-[#079DD9] font-medium" id="suggest-text-1">Chuẩn hoá toàn bộ về chuẩn ISO-8601 (YYYY-MM-DD); điền SKU_UNKNOWN cho mã rỗng</td>
+                  <td class="p-3 text-right">
+                    <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#ECD8F2] text-[#8F60BF]" id="status-tag-1">Đề xuất</span>
+                  </td>
+                </tr>
+                <tr class="hover:bg-[#FAF6FC]">
+                  <td class="p-3 text-center">
+                    <input type="checkbox" id="chk-clean-2" checked class="w-4 h-4 accent-[#8F60BF] rounded cursor-pointer">
+                  </td>
+                  <td class="p-3 font-bold text-[#1E1233]">
+                    Bất nhất công thức số học kế toán
+                  </td>
+                  <td class="p-3 text-center font-mono font-bold text-[#8F60BF]">48 đơn</td>
+                  <td class="p-3 text-[#6E5D80]">Lệch số liệu giữa kế toán và bán hàng; báo cáo doanh thu không khớp thực nhận</td>
+                  <td class="p-3 text-[#079DD9] font-medium" id="suggest-text-2">Áp dụng công thức chuẩn: Doanh thu thuần = Doanh thu thô - Chiết khấu voucher thực tế</td>
+                  <td class="p-3 text-right">
+                    <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#ECD8F2] text-[#8F60BF]" id="status-tag-2">Đề xuất</span>
+                  </td>
+                </tr>
+                <tr class="hover:bg-[#FAF6FC]">
+                  <td class="p-3 text-center">
+                    <input type="checkbox" id="chk-clean-3" checked class="w-4 h-4 accent-[#8F60BF] rounded cursor-pointer">
+                  </td>
+                  <td class="p-3 font-bold text-[#1E1233]">
+                    Đơn hàng dị thường & Nghi vấn gian lận
+                  </td>
+                  <td class="p-3 text-center font-mono font-bold text-[#8F60BF]">62 đơn</td>
+                  <td class="p-3 text-[#6E5D80]">Thổi phồng số lượng đơn hàng, sai lệch chỉ số AOV và ROI các chiến dịch</td>
+                  <td class="p-3 text-[#079DD9] font-medium" id="suggest-text-3">Gắn cờ cách ly (Exclude from P&L) các đơn 0đ bất thường và đơn spam từ cùng IP trong 60s</td>
+                  <td class="p-3 text-right">
+                    <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#ECD8F2] text-[#8F60BF]" id="status-tag-3">Đề xuất</span>
+                  </td>
+                </tr>
+                <tr class="hover:bg-[#FAF6FC]">
+                  <td class="p-3 text-center">
+                    <input type="checkbox" id="chk-clean-4" checked class="w-4 h-4 accent-[#8F60BF] rounded cursor-pointer">
+                  </td>
+                  <td class="p-3 font-bold text-[#1E1233]">
+                    Cộng dồn trùng lặp đa điểm chạm (Multi-touch)
+                  </td>
+                  <td class="p-3 text-center font-mono font-bold text-[#8F60BF]">96 đơn (298.13M ₫)</td>
+                  <td class="p-3 text-[#6E5D80]">Gây ảo giác tăng trưởng: mỗi phòng ban tự nhận 100% doanh thu của cùng một đơn</td>
+                  <td class="p-3 text-[#079DD9] font-medium" id="suggest-text-4">Kích hoạt giải thuật khử trùng 1/N (Equal Split) hoặc theo tỷ lệ giá trị đóng góp</td>
+                  <td class="p-3 text-right">
+                    <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#ECD8F2] text-[#8F60BF]" id="status-tag-4">Đề xuất</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- MỤC GÓP Ý, YÊU CẦU SỬA ĐỔI CỦA NGƯỜI DÙNG (USER FEEDBACK & AMENDMENT PANEL) -->
+          <div class="p-4 rounded-2xl bg-[#FAF6FC] border border-[#BEB6F2] space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-2 text-xs font-bold text-[#1E1233]">
+                <i class="fa-solid fa-comment-pen text-[#8F60BF]"></i>
+                <span>Góp ý, phản hồi hoặc chỉ thị tùy biến cho AI Agent (Tùy chọn)</span>
+              </div>
+              <span class="text-[11px] text-[#6E5D80]">Human-in-the-Loop Feedback</span>
+            </div>
+            
+            <div class="flex flex-wrap gap-2 text-[11px]">
+              <button type="button" onclick="setQuickFeedback('Giữ lại các đơn 0đ của chương trình tặng quà tri ân đối tác')" class="px-2.5 py-1 rounded-lg bg-white hover:bg-[#ECD8F2] text-[#8F60BF] border border-[#BEB6F2] transition">
+                + Giữ đơn 0đ quà tặng
+              </button>
+              <button type="button" onclick="setQuickFeedback('Áp dụng chia tỷ lệ 70% kênh chốt đơn và 30% kênh mở đầu thay vì 1/N')" class="px-2.5 py-1 rounded-lg bg-white hover:bg-[#ECD8F2] text-[#8F60BF] border border-[#BEB6F2] transition">
+                + Đổi quy tắc phân bổ 70/30
+              </button>
+              <button type="button" onclick="setQuickFeedback('Loại trừ các đơn hoàn trả thuộc lỗi vận chuyển đối tác thứ ba')" class="px-2.5 py-1 rounded-lg bg-white hover:bg-[#ECD8F2] text-[#8F60BF] border border-[#BEB6F2] transition">
+                + Trừ lỗi shipper thứ 3
+              </button>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-2">
+              <input type="text" id="user-cleansing-feedback" placeholder="Nhập yêu cầu sửa đổi phương án xử lý dữ liệu trước khi duyệt (ví dụ: 'Giữ lại đơn khuyến mãi nội bộ...')" class="flex-1 bg-white border border-[#BEB6F2] rounded-xl px-3.5 py-2 text-xs text-[#1E1233] focus:ring-2 focus:ring-[#8F60BF] focus:outline-none">
+              <button type="button" onclick="handleSendFeedbackToAgent()" class="px-4 py-2 bg-[#ECD8F2] hover:bg-[#BEB6F2] text-[#8F60BF] border border-[#8F60BF] rounded-xl text-xs font-bold transition flex items-center justify-center space-x-1.5 flex-shrink-0">
+                <i class="fa-solid fa-paper-plane text-xs"></i>
+                <span>Gửi Yêu Cầu Cho Agent</span>
+              </button>
+            </div>
+
+            <!-- HỘP HIỂN THỊ PHẢN HỒI TỪ AGENT SAU KHI TIẾP THU Ý KIẾN -->
+            <div id="agent-feedback-response-box" class="hidden p-3 rounded-xl bg-white border border-[#079DD9] text-xs text-[#1E1233] space-y-1">
+              <div class="flex items-center space-x-1.5 font-bold text-[#079DD9]">
+                <i class="fa-solid fa-robot"></i>
+                <span>Agent đã tiếp thu và điều chỉnh phương án:</span>
+              </div>
+              <p id="agent-feedback-response-text" class="text-[#6E5D80] leading-relaxed italic"></p>
+            </div>
+          </div>
+
+          <!-- KHUNG XÁC NHẬN PHÊ DUYỆT CỦA CON NGƯỜI (HITL ACTION BOX) -->
+          <div id="cleansing-action-box" class="p-5 rounded-2xl bg-white border border-[#8F60BF] flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="space-y-1">
+              <div class="flex items-center space-x-2">
+                <i class="fa-solid fa-user-shield text-[#8F60BF]"></i>
+                <span class="text-xs font-bold text-[#1E1233]">Chốt chặn người quản trị dữ liệu (Data Steward Approval)</span>
+              </div>
+              <p class="text-[11px] text-[#6E5D80]">
+                Kiểm tra các ô tích chọn và nội dung đề xuất. Nhấn phê duyệt để cấp quyền cho Agent chính thức áp dụng và chuyển sang Bước 3.
+              </p>
+            </div>
+            <div class="flex items-center space-x-3 flex-shrink-0">
+              <button onclick="rejectCleansingPlan()" class="px-4 py-2.5 rounded-xl border border-[#BEB6F2] text-[#6E5D80] hover:text-[#1E1233] text-xs font-bold transition">
+                Từ chối / Tự sửa tay
+              </button>
+              <button onclick="approveCleansingPlan()" class="px-6 py-2.5 bg-[#8F60BF] hover:bg-[#7b4fa8] text-white rounded-xl text-xs font-bold transition shadow-sm flex items-center space-x-2">
+                <i class="fa-solid fa-signature text-xs text-[#99D9F2]"></i>
+                <span>Đồng Ý & Phê Duyệt Để Tiếp Tục</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- HỘP THÔNG BÁO SAU KHI ĐÃ PHÊ DUYỆT THÀNH CÔNG -->
+          <div id="cleansing-approved-banner" class="hidden p-4 rounded-2xl bg-[#ECD8F2]/60 border border-[#8F60BF] flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+              <div class="w-8 h-8 rounded-xl bg-[#8F60BF] text-white flex items-center justify-center font-bold text-xs">
+                <i class="fa-solid fa-check-double"></i>
+              </div>
+              <div>
+                <div class="text-xs font-bold text-[#1E1233]">Phương án làm sạch đã được phê duyệt và áp dụng thành công!</div>
+                <div class="text-[11px] text-[#6E5D80]">Chữ ký kiểm toán: <strong class="font-mono text-[#8F60BF]">AUDIT_STAMP_APPROVED_CLEAN_OK</strong> · Agent đã mở khóa quyền chuyển sang Bước 3.</div>
+              </div>
+            </div>
+            <button onclick="switchStep(3)" class="px-5 py-2 bg-[#8F60BF] hover:bg-[#7b4fa8] text-white rounded-xl text-xs font-bold transition flex items-center space-x-1.5 shadow-sm">
+              <span>Đến Bước 3: Chẩn đoán rủi ro</span>
+              <i class="fa-solid fa-arrow-right text-xs"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-[#FAF6FC] border border-[#ECD8F2] space-y-3">
+          <div class="text-xs font-bold text-[#1E1233] uppercase">Ma trận tiếp xúc chéo giữa các kênh marketing (Đã bóc tách)</div>
+          <div class="overflow-x-auto text-xs font-mono">
+            <table class="w-full text-center">
+              <tr class="text-[#6E5D80] border-b border-[#ECD8F2] pb-1">
+                <th class="p-2 text-left">Kênh chính</th>
+                <th class="p-2">Flash Sale</th>
+                <th class="p-2">Khai Xuân</th>
+                <th class="p-2">Combo VIP</th>
+                <th class="p-2">Livestream</th>
+              </tr>
+              <tr class="hover:bg-white"><td class="p-2 font-bold text-left">Flash Sale</td><td class="text-[#6E5D80]">-</td><td class="text-[#8F60BF] font-bold">18 đơn</td><td class="text-[#8F60BF] font-bold">42 đơn</td><td class="text-[#8F60BF] font-bold">31 đơn</td></tr>
+              <tr class="hover:bg-white"><td class="p-2 font-bold text-left">Khai Xuân</td><td>18 đơn</td><td class="text-[#6E5D80]">-</td><td>12 đơn</td><td>14 đơn</td></tr>
+              <tr class="hover:bg-white"><td class="p-2 font-bold text-left">Combo VIP</td><td>42 đơn</td><td>12 đơn</td><td class="text-[#6E5D80]">-</td><td>9 đơn</td></tr>
+              <tr class="hover:bg-white"><td class="p-2 font-bold text-left">Livestream</td><td>31 đơn</td><td>14 đơn</td><td>9 đơn</td><td class="text-[#6E5D80]">-</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- BƯỚC 3: CHẨN ĐOÁN RỦI RO DÒNG TIỀN -->
+      <div id="step-panel-3" class="hidden space-y-6">
+        <div class="border-b border-[#ECD8F2] pb-4 flex justify-between items-center">
+          <div>
+            <h2 class="text-2xl font-bold text-[#1E1233]">Bước 3: Chẩn đoán 5 véc-tơ rủi ro dòng tiền & SLA</h2>
+            <p class="text-xs text-[#6E5D80] mt-1">Quét sâu hoàn trả trễ, xói mòn chiết khấu gộp, hao hụt kho vận và phân bổ chi phí cố định.</p>
+          </div>
+          <button onclick="switchStep(4)" class="px-5 py-2.5 bg-[#8F60BF] hover:bg-[#7b4fa8] text-white rounded-xl text-xs font-bold transition flex items-center space-x-2 shadow-sm">
+            <span>Tiếp tục Bước 4: Mô phỏng & Duyệt luật</span>
+            <i class="fa-solid fa-arrow-right text-xs"></i>
+          </button>
+        </div>
+
+        <div class="overflow-x-auto border border-[#ECD8F2] rounded-2xl">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="bg-[#FAF6FC] text-[#6E5D80] font-semibold border-b border-[#ECD8F2]">
+                <th class="p-3">Kênh bán hàng</th>
+                <th class="p-3 text-right">Doanh thu thô</th>
+                <th class="p-3 text-right">Số đơn</th>
+                <th class="p-3 text-right">Hoàn trả cũ (≤ SLA)</th>
+                <th class="p-3 text-right text-[#8F60BF]">Trả trễ phát hiện thêm (> SLA)</th>
+                <th class="p-3 text-right font-bold text-[#1E1233]">Tổng hoàn trả thực</th>
+              </tr>
+            </thead>
+            <tbody id="step3-table-body" class="divide-y divide-[#ECD8F2] font-mono"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- BƯỚC 4: MÔ PHỎNG & DUYỆT LUẬT PHÂN BỔ (HITL 1) -->
+      <div id="step-panel-4" class="hidden space-y-6">
+        <div class="border-b border-[#ECD8F2] pb-4 flex justify-between items-center">
+          <div>
+            <h2 class="text-2xl font-bold text-[#1E1233]">Bước 4: Mô phỏng & Chốt chặn HITL #1 (Quy tắc phân bổ)</h2>
+            <p class="text-xs text-[#6E5D80] mt-1">Trưởng phòng phê duyệt cơ chế phân bổ doanh thu đa chạm và thời gian quét đối soát.</p>
+          </div>
+          <button onclick="approveHitl1AndNext()" class="px-5 py-2.5 bg-[#8F60BF] hover:bg-[#7b4fa8] text-white rounded-xl text-xs font-bold transition flex items-center space-x-2 shadow-sm">
+            <i class="fa-solid fa-check text-xs"></i>
+            <span>Duyệt & Chuyển Sang Bước 5 (Báo cáo)</span>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+          <div>
+            <label class="font-bold text-[#1E1233] block mb-1">1. Cơ chế phân bổ đa chạm</label>
+            <select id="select-attr" onchange="recalculateStep4()" class="w-full bg-[#FAF6FC] border border-[#BEB6F2] rounded-xl px-3 py-2 font-medium text-[#1E1233] focus:outline-none">
+              <option value="equal_split" selected>Chia đều 1/N (Equal Split)</option>
+              <option value="discount_weighted">Theo tỷ trọng voucher</option>
+              <option value="first_touch">Chương trình chạm đầu</option>
+              <option value="last_touch">Chương trình chốt đơn</option>
+            </select>
+          </div>
+          <div>
+            <label class="font-bold text-[#1E1233] block mb-1">2. Tiêu thức chia chi phí chung</label>
+            <select id="select-cost" onchange="recalculateStep4()" class="w-full bg-[#FAF6FC] border border-[#BEB6F2] rounded-xl px-3 py-2 font-medium text-[#1E1233] focus:outline-none">
+              <option value="revenue_share" selected>Tỷ trọng doanh thu sạch</option>
+              <option value="order_share">Tỷ trọng số lượng đơn</option>
+              <option value="equal_share">Chia đều 25%</option>
+            </select>
+          </div>
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <span class="font-bold text-[#1E1233]">3. Cửa sổ quét trả hàng:</span>
+              <span id="display-return-days" class="font-bold text-[#8F60BF] font-mono">30 ngày</span>
+            </div>
+            <input type="range" id="slider-return-days" min="0" max="60" value="30" onchange="recalculateStep4()" class="w-full h-2 bg-[#ECD8F2] rounded-lg appearance-none cursor-pointer accent-[#8F60BF]">
+          </div>
+          <div>
+            <label class="font-bold text-[#1E1233] block mb-1">4. Quỹ chi phí chung (VNĐ)</label>
+            <input type="number" id="input-overhead" value="80000000" onchange="recalculateStep4()" class="w-full bg-[#FAF6FC] border border-[#BEB6F2] rounded-xl px-3 py-2 font-mono text-[#1E1233] focus:outline-none">
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-[#FAF6FC] border border-[#ECD8F2] space-y-2">
+          <div class="text-xs font-bold text-[#1E1233] uppercase">Nhật ký kiểm toán mẫu đơn hàng (Order Audit Trail)</div>
+          <div class="overflow-x-auto max-h-48 custom-scrollbar border border-[#ECD8F2] rounded-xl bg-white">
+            <table class="w-full text-left text-xs font-mono">
+              <thead class="bg-[#FAF6FC] text-[#6E5D80] sticky top-0 border-b border-[#ECD8F2]">
+                <tr>
+                  <th class="p-2.5">Mã đơn</th>
+                  <th class="p-2.5">Kênh</th>
+                  <th class="p-2.5 text-right">Giá trị đơn</th>
+                  <th class="p-2.5">Chiến dịch chạm</th>
+                  <th class="p-2.5 text-right">Tỷ trọng chia</th>
+                  <th class="p-2.5 text-right">Trạng thái đổi trả</th>
+                </tr>
+              </thead>
+              <tbody id="step4-audit-body" class="divide-y divide-[#ECD8F2]"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- BƯỚC 5: BÁO CÁO KINH DOANH & DASHBOARD ĐIỀU HÀNH -->
+      <div id="step-panel-5" class="space-y-7">
+        
+        <!-- HEADER BÁO CÁO KINH DOANH -->
+        <div class="border-b border-[#ECD8F2] pb-4 flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div>
+            <h1 class="text-3xl font-extrabold text-[#1E1233] tracking-tight">Báo cáo kinh doanh</h1>
+            <p class="text-xs text-[#6E5D80] mt-1">Hệ thống phân tích đa kênh · 1 tập dữ liệu chuẩn hóa · Đã bóc tách 298.13M ₫ doanh thu ảo</p>
+          </div>
+          <div class="flex items-center space-x-2">
+            <button onclick="handleExportReportCSV()" class="px-4 py-2 rounded-xl bg-white border border-[#BEB6F2] text-[#8F60BF] hover:bg-[#FAF6FC] text-xs font-bold transition flex items-center space-x-1.5 shadow-xs">
+              <i class="fa-solid fa-file-arrow-down text-xs text-[#079DD9]"></i>
+              <span>Xuất Báo Cáo (.csv)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- SUB-NAV 5 TABS -->
+        <div class="flex items-center space-x-6 border-b border-[#ECD8F2] text-xs">
+          <button onclick="switchSubTab(1)" id="subtab-1" class="pb-3 subtab-active">Tóm tắt</button>
+          <button onclick="switchSubTab(2)" id="subtab-2" class="pb-3 subtab-inactive">Chỉ số chính</button>
+          <button onclick="switchSubTab(3)" id="subtab-3" class="pb-3 subtab-inactive">Phân tích chuyên đề</button>
+          <button onclick="switchSubTab(4)" id="subtab-4" class="pb-3 subtab-inactive">Kết luận và đề xuất</button>
+          <button onclick="switchSubTab(5)" id="subtab-5" class="pb-3 subtab-inactive">Nguồn và chất lượng dữ liệu</button>
+        </div>
+
+        <!-- HỘP TÓM TẮT ĐIỀU HÀNH -->
+        <div class="p-5 rounded-2xl bg-[#ECD8F2]/40 border border-[#BEB6F2] space-y-2">
+          <h3 class="text-xs font-bold text-[#8F60BF] uppercase tracking-wider">Tóm tắt điều hành</h3>
+          <p class="text-xs text-[#1E1233] leading-relaxed">
+            Báo cáo tổng hợp đối soát hiệu quả kinh doanh đa kênh. Sau khi kích hoạt thuật toán khử trùng lặp đa chạm (loại bỏ 298.13M ₫ doanh thu ảo) và quét hoàn trả trễ theo cửa sổ 30 ngày (phát hiện thêm 72.57M ₫ hàng trả muộn), kết quả cho thấy toàn hệ thống âm ròng -14.89M ₫. Khuyến nghị ngừng ngay Kênh Flash Sale để cắt lỗ và điều chuyển 48M ₫ sang Kênh Khai Xuân có ROI cao nhất.
+          </p>
+        </div>
+
+        <!-- 4 THẺ KPI CHUẨN ĐỒNG NHẤT -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="p-5 rounded-2xl bg-white border border-[#ECD8F2] space-y-2 panel-shadow">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-bold text-[#6E5D80] uppercase">Số đơn hàng thực tế</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#FAF6FC] text-[#8F60BF] border border-[#ECD8F2]">AUDITED</span>
+            </div>
+            <div class="text-2xl font-black font-mono text-[#1E1233]">220 đơn</div>
+            <div class="text-[10px] text-[#6E5D80]">96 đơn đa chạm · 0 đơn gian lận</div>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-white border border-[#ECD8F2] space-y-2 panel-shadow">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-bold text-[#6E5D80] uppercase">Doanh thu sạch (Net Clean)</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#ECD8F2] text-[#8F60BF] font-mono">-33.2%</span>
+            </div>
+            <div class="text-2xl font-black font-mono text-[#079DD9]">599.580.000 ₫</div>
+            <div class="text-[10px] text-[#8F60BF] font-semibold">Bóc tách 298.13M ₫ doanh thu ảo</div>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-white border border-[#ECD8F2] space-y-2 panel-shadow">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-bold text-[#6E5D80] uppercase">Lợi nhuận ròng thực tế</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-600 border border-rose-200">ÂM RÒNG</span>
+            </div>
+            <div class="text-2xl font-black font-mono text-[#8F60BF]">-14.894.000 ₫</div>
+            <div class="text-[10px] text-[#8F60BF] font-semibold">Tỷ suất biên ròng -3.5% (Cần điều chỉnh)</div>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-white border border-[#ECD8F2] space-y-2 panel-shadow">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-bold text-[#6E5D80] uppercase">Tổng chi phí vận hành</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#FAF6FC] text-[#079DD9] border border-[#BEB6F2]">100% CÂN BẰNG</span>
+            </div>
+            <div class="text-2xl font-black font-mono text-[#1E1233]">193.500.000 ₫</div>
+            <div class="text-[10px] text-[#6E5D80]">Gồm 113.5M trực tiếp + 80M chung</div>
+          </div>
+        </div>
+
+        <!-- KHỐI 6 LOẠI BIỂU ĐỒ TRỰC QUAN & CHUYÊN SÂU -->
+        <div class="space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div class="text-xs font-bold text-[#1E1233] uppercase tracking-wider flex items-center space-x-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-[#079DD9]"></span>
+              <span>Hệ sinh thái Dashboard phân tích đa chiều (Waterfall, Line & Area, Stacked Bar, Bar Lợi nhuận, Bubble & Donut)</span>
+            </div>
+            <span class="text-[11px] font-mono text-[#8F60BF] font-bold bg-[#ECD8F2] px-3 py-1 rounded-full border border-[#BEB6F2]">PASTEL COLORWAY · RETINA CRISP</span>
+          </div>
+
+          <!-- BIỂU ĐỒ THÁC NƯỚC (PROFIT WATERFALL CHART) MỚI TÍCH HỢP -->
+          <div class="p-6 rounded-3xl bg-white border border-[#ECD8F2] panel-shadow space-y-3">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#ECD8F2] pb-3">
+              <div>
+                <span class="text-xs font-bold text-[#1E1233] flex items-center space-x-2">
+                  <i class="fa-solid fa-water-ladder text-[#079DD9]"></i>
+                  <span>1. Biểu đồ Thác Nước Khấu Trừ Dòng Tiền & Lợi Nhuận (Profit Waterfall Breakdown)</span>
+                </span>
+                <p class="text-[11px] text-[#6E5D80] mt-0.5">Mô tả trực quan từ Doanh thu thô ban đầu &rarr; Bóc tách doanh thu trùng &rarr; Chiết khấu &rarr; Đổi trả trễ &rarr; Giá vốn COGS &rarr; Chi phí vận hành &rarr; Lợi nhuận ròng cuối cùng.</p>
+              </div>
+              <span class="text-[10px] text-[#6E5D80] font-mono bg-[#FAF6FC] px-2.5 py-1 rounded-xl border border-[#ECD8F2]">Waterfall Architecture</span>
+            </div>
+            <div class="h-72">
+              <canvas id="chart-waterfall"></canvas>
+            </div>
+          </div>
+
+          <!-- Hàng 1: Biểu đồ đường kép & Donut Chart -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="p-5 rounded-3xl bg-white border border-[#ECD8F2] panel-shadow space-y-3">
+              <div class="flex justify-between items-center">
+                <span class="text-xs font-bold text-[#1E1233]">2. Xu hướng doanh thu qua 12 tháng (Thô ảo vs. Thực nhận sau làm sạch)</span>
+                <span class="text-[10px] text-[#6E5D80] font-mono">Spline Area & Line</span>
+              </div>
+              <div class="h-64">
+                <canvas id="chart-revenue-trend"></canvas>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-3xl bg-white border border-[#ECD8F2] panel-shadow space-y-3">
+              <div class="flex justify-between items-center">
+                <span class="text-xs font-bold text-[#1E1233]">3. Cơ cấu chi phí vận hành & Chi phí gián tiếp toàn chuỗi</span>
+                <span class="text-[10px] text-[#6E5D80] font-mono">Donut Chart</span>
+              </div>
+              <div class="h-64 flex items-center justify-center">
+                <canvas id="chart-cost-structure"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hàng 2: Biểu đồ Cột xếp chồng & Thanh ngang Lợi nhuận -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="p-5 rounded-3xl bg-white border border-[#ECD8F2] panel-shadow space-y-3">
+              <div class="flex justify-between items-center">
+                <span class="text-xs font-bold text-[#1E1233]">4. Khấu trừ doanh thu thuần, voucher & hoàn trả theo kênh</span>
+                <span class="text-[10px] text-[#6E5D80] font-mono">Stacked Bar Chart</span>
+              </div>
+              <div class="h-64">
+                <canvas id="chart-stacked-breakdown"></canvas>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-3xl bg-white border border-[#ECD8F2] panel-shadow space-y-3">
+              <div class="flex justify-between items-center">
+                <span class="text-xs font-bold text-[#1E1233]">5. So sánh Lợi nhuận ròng thực tế (Net Contribution)</span>
+                <span class="text-[10px] text-[#6E5D80] font-mono">Horizontal Bar Chart</span>
+              </div>
+              <div class="h-64">
+                <canvas id="chart-horizontal-profit"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hàng 3: Biểu đồ Bong bóng tương quan 3 chiều -->
+          <div class="p-5 rounded-3xl bg-white border border-[#ECD8F2] panel-shadow space-y-3">
+            <div class="flex justify-between items-center">
+              <div>
+                <span class="text-xs font-bold text-[#1E1233]">6. Ma trận tương quan đa biến (Ngân sách Marketing x Lợi nhuận ròng x Tỷ lệ hàng đổi trả)</span>
+                <p class="text-[11px] text-[#6E5D80] mt-0.5">Trục X: Chi phí Marketing · Trục Y: Lợi nhuận ròng · Độ lớn bong bóng: Tỷ lệ hàng đổi trả (%)</p>
+              </div>
+              <span class="text-[10px] text-[#6E5D80] font-mono">Bubble Correlation Chart</span>
+            </div>
+            <div class="h-72">
+              <canvas id="chart-bubble-correlation"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- BẢNG P&L 12 DÒNG CHI TIẾT -->
+        <div class="p-6 rounded-3xl bg-white border border-[#ECD8F2] panel-shadow space-y-4">
+          <div class="flex justify-between items-center">
+            <h3 class="text-xs font-bold text-[#1E1233] uppercase tracking-wider">Bảng P&L Chi Tiết 12 Dòng Chuẩn Kế Toán Quản Trị</h3>
+            <span class="text-[11px] text-[#6E5D80] font-mono">Deterministic Engine 100% cân bằng</span>
+          </div>
+          <div class="overflow-x-auto border border-[#ECD8F2] rounded-2xl">
+            <table class="w-full text-left text-xs border-collapse font-sans">
+              <thead>
+                <tr class="bg-[#FAF6FC] text-[#6E5D80] font-semibold border-b border-[#ECD8F2]">
+                  <th class="p-2.5">Chỉ tiêu tài chính</th>
+                  <th class="p-2.5 text-right font-mono">Kênh Flash Sale</th>
+                  <th class="p-2.5 text-right font-mono">Kênh Khai Xuân</th>
+                  <th class="p-2.5 text-right font-mono">Kênh Combo VIP</th>
+                  <th class="p-2.5 text-right font-mono">Kênh Livestream</th>
+                  <th class="p-2.5 text-right font-mono font-bold text-[#1E1233] bg-[#ECD8F2]">Toàn hệ thống</th>
+                </tr>
+              </thead>
+              <tbody id="pnl-table-body" class="divide-y divide-[#ECD8F2]"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- CHỐT CHẶN HITL #2: KÝ DUYỆT TÁI PHÂN BỔ NGÂN SÁCH -->
+        <div class="p-6 rounded-3xl bg-[#ECD8F2]/30 border border-[#BEB6F2] space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div class="flex items-center space-x-2">
+              <span class="w-3 h-3 rounded-full bg-[#8F60BF]"></span>
+              <h4 class="text-xs font-bold text-[#8F60BF] uppercase tracking-wider">Chốt chặn HITL #2: Ký duyệt điều chuyển ngân sách tối ưu P&L</h4>
+              <span id="badge-hitl2" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-white text-[#8F60BF] border border-[#BEB6F2]">AWAITING_DECISION</span>
+            </div>
+            <span class="text-xs text-[#1E1233]">Thu hồi từ <strong>Kênh Flash Sale (STOP)</strong> &rarr; Tái đầu tư sang <strong>Kênh Khai Xuân (CONTINUE)</strong></span>
+          </div>
+
+          <p class="text-xs text-[#6E5D80] leading-relaxed">
+            AI Copilot đề xuất đóng ngay kênh Flash Sale (âm ròng -46.7M ₫), thu hồi toàn bộ <strong>48,000,000 ₫</strong> chi phí marketing để chuyển sang Kênh Khai Xuân (ROI 22.3%). Quyết định này giúp chuyển trạng thái dòng tiền toàn chuỗi từ âm -14.89M ₫ thành dương <strong>+31.21M ₫</strong>.
+          </p>
+
+          <div class="flex flex-col sm:flex-row sm:items-center gap-3 pt-1">
+            <div class="flex items-center space-x-2 text-xs">
+              <span class="font-bold text-[#1E1233]">Số tiền chuyển ngân sách:</span>
+              <input type="number" id="input-hitl2-amount" value="48000000" class="bg-white border border-[#BEB6F2] rounded-xl px-3 py-1.5 font-mono text-xs font-bold text-[#1E1233] focus:outline-none w-44">
+            </div>
+            <button onclick="handleApproveHitl2()" class="px-5 py-2 bg-[#8F60BF] hover:bg-[#7b4fa8] text-white rounded-xl text-xs font-bold transition shadow-sm">
+              Ký Duyệt Điều Chuyển Ngân Sách
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+
+    <!-- TRỢ LÝ AI COPILOT SLIDE-OVER DRAWER -->
+    <div id="agent-drawer" class="fixed inset-y-0 right-0 w-[420px] bg-white shadow-2xl border-l border-[#ECD8F2] p-6 flex flex-col justify-between transform translate-x-full transition-transform duration-300 z-50">
+      <div class="space-y-4 flex-1 flex flex-col overflow-hidden">
+        <div class="flex items-center justify-between pb-3 border-b border-[#ECD8F2]">
+          <div class="flex items-center space-x-2.5">
+            <div class="w-8 h-8 rounded-xl bg-[#ECD8F2] text-[#8F60BF] flex items-center justify-center font-bold text-xs">
+              AI
+            </div>
+            <div>
+              <h3 class="text-sm font-bold text-[#1E1233]">Vitara Growth Copilot</h3>
+              <span class="text-[10px] text-[#079DD9] font-bold font-mono">Enterprise Active</span>
+            </div>
+          </div>
+          <button onclick="toggleAgentDrawer()" class="text-[#6E5D80] hover:text-[#1E1233]">
+            <i class="fa-solid fa-xmark text-sm"></i>
+          </button>
+        </div>
+
+        <div class="flex flex-wrap gap-1.5 text-xs">
+          <button onclick="sendQuickAgent('Vì sao Kênh Flash Sale bị STOP?')" class="px-2.5 py-1 rounded-full bg-[#FAF6FC] hover:bg-[#ECD8F2] text-[#8F60BF] text-[11px] font-bold border border-[#BEB6F2]">
+            🔍 Vì sao Flash Sale STOP?
+          </button>
+          <button onclick="sendQuickAgent('Kế hoạch điều chuyển ngân sách tối ưu')" class="px-2.5 py-1 rounded-full bg-[#FAF6FC] hover:bg-[#ECD8F2] text-[#8F60BF] text-[11px] font-bold border border-[#BEB6F2]">
+            💰 Tối ưu ngân sách
+          </button>
+        </div>
+
+        <div id="agent-chat-box" class="flex-1 overflow-y-auto custom-scrollbar p-3 rounded-2xl bg-[#FAF6FC] space-y-3 text-xs">
+          <div class="flex items-start space-x-2">
+            <div class="w-6 h-6 rounded-full bg-[#8F60BF] text-white flex items-center justify-center font-bold text-[10px] flex-shrink-0">
+              V
+            </div>
+            <div class="bg-white p-3 rounded-2xl rounded-tl-none border border-[#ECD8F2] text-[#1E1233] leading-relaxed shadow-xs">
+              Xin chào! Tôi là Trợ lý Cố vấn Tăng trưởng Vitara AI. Bạn cần tôi bóc tách P&L kênh nào hay phân tích lý do điều chuyển ngân sách?
+            </div>
+          </div>
+        </div>
+
+        <form onsubmit="handleAgentChat(event)" class="flex items-center space-x-2 pt-2">
+          <input type="text" id="agent-chat-input" placeholder="Hỏi AI về chiến dịch hoặc ngân sách..." class="flex-1 bg-[#FAF6FC] border border-[#BEB6F2] rounded-full px-4 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-[#8F60BF]">
+          <button type="submit" class="px-4 py-2 bg-[#8F60BF] hover:bg-[#7b4fa8] text-white rounded-full text-xs font-semibold shadow-xs">
+            Gửi
+          </button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- MODAL CHI TIẾT QUY TẮC XỬ LÝ DỮ LIỆU BỊ THIẾU (MISSING DATA IMPUTATION MODAL) -->
+  <div id="missing-data-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-xs hidden z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-2xl w-full border border-[#ECD8F2] p-6 space-y-5 panel-shadow">
+      <div class="flex items-center justify-between pb-3 border-b border-[#ECD8F2]">
+        <div class="flex items-center space-x-2.5">
+          <div class="w-8 h-8 rounded-xl bg-[#ECD8F2] text-[#8F60BF] flex items-center justify-center font-bold text-xs">
+            <i class="fa-solid fa-filter-circle-xmark"></i>
+          </div>
+          <div>
+            <h3 class="text-sm font-bold text-[#1E1233]">Quy Chuẩn Xử Lý Dữ Liệu Thiếu (Missing Value Policy)</h3>
+            <p class="text-[11px] text-[#6E5D80]">Thuật toán xử lý khuyết thiếu đảm bảo tính cân bằng kế toán và bảo toàn Audit Trail</p>
+          </div>
+        </div>
+        <button onclick="toggleMissingDataPolicyModal()" class="text-[#6E5D80] hover:text-[#1E1233]">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+      </div>
+
+      <div class="space-y-3 text-xs text-[#1E1233]">
+        <div class="p-3.5 rounded-2xl bg-[#FAF6FC] border border-[#ECD8F2] space-y-1">
+          <div class="font-bold text-[#8F60BF] flex items-center justify-between">
+            <span>1. Khuyết Mã Sản Phẩm / Danh mục (SKU = Null / Blank)</span>
+            <span class="px-2 py-0.5 rounded text-[10px] bg-white border border-[#BEB6F2] text-[#8F60BF] font-mono">18 trường hợp</span>
+          </div>
+          <p class="text-[11px] text-[#6E5D80] leading-relaxed">
+            • <strong>Cách xử lý:</strong> Gán mã đại diện <code class="bg-white px-1.5 py-0.5 rounded text-[#079DD9] font-mono">SKU_UNKNOWN_GENERAL</code>.<br>
+            • <strong>Tính Giá vốn COGS:</strong> Không gán COGS = 0 (tránh phóng đại lợi nhuận gộp ảo), mà áp dụng hệ số COGS trung bình theo ngành hàng là <strong>50% giá trị bán</strong>.
+          </p>
+        </div>
+
+        <div class="p-3.5 rounded-2xl bg-[#FAF6FC] border border-[#ECD8F2] space-y-1">
+          <div class="font-bold text-[#079DD9] flex items-center justify-between">
+            <span>2. Khuyết Số Tiền Chiết Khấu / Voucher (Discount = NaN)</span>
+            <span class="px-2 py-0.5 rounded text-[10px] bg-white border border-[#BEB6F2] text-[#079DD9] font-mono">42 đơn hàng</span>
+          </div>
+          <p class="text-[11px] text-[#6E5D80] leading-relaxed">
+            • <strong>Cách xử lý:</strong> Tính suy luận số học ngược: <code class="bg-white px-1.5 py-0.5 rounded text-[#8F60BF] font-mono">Discount = Doanh thu thô - Tiền thực trả</code>.<br>
+            • Nếu Doanh thu thô = Tiền thực trả, chuẩn hóa tự động thành <code class="bg-white px-1.5 py-0.5 rounded text-[#079DD9] font-mono">0 ₫</code> để tránh lỗi công thức hàm SUM().
+          </p>
+        </div>
+
+        <div class="p-3.5 rounded-2xl bg-[#FAF6FC] border border-[#ECD8F2] space-y-1">
+          <div class="font-bold text-[#8F60BF] flex items-center justify-between">
+            <span>3. Khuyết Kênh Tiếp Thị / Mã Chiến Dịch (Campaign = Null)</span>
+            <span class="px-2 py-0.5 rounded text-[10px] bg-white border border-[#BEB6F2] text-[#8F60BF] font-mono">54 đơn hàng</span>
+          </div>
+          <p class="text-[11px] text-[#6E5D80] leading-relaxed">
+            • <strong>Cách xử lý:</strong> Không xóa đơn. Gán nhãn <code class="bg-white px-1.5 py-0.5 rounded text-[#8F60BF] font-mono">ORGANIC_DIRECT</code> (Khách mua tự nhiên).<br>
+            • Nhằm bảo toàn tổng doanh thu kế toán nhưng ngăn chặn các chiến dịch quảng cáo tự nhận vơ doanh thu không phải của mình.
+          </p>
+        </div>
+
+        <div class="p-3.5 rounded-2xl bg-[#FAF6FC] border border-[#ECD8F2] space-y-1">
+          <div class="font-bold text-rose-600 flex items-center justify-between">
+            <span>4. Đơn Trống Hoàn Toàn / Dữ Liệu Rác (Empty Rows / Bot Spam)</span>
+            <span class="px-2 py-0.5 rounded text-[10px] bg-white border border-rose-200 text-rose-600 font-mono">28 đơn hàng</span>
+          </div>
+          <p class="text-[11px] text-[#6E5D80] leading-relaxed">
+            • <strong>Cách xử lý:</strong> Đưa vào danh sách <strong>Cách Ly (Quarantine List)</strong>, loại khỏi báo cáo P&L nhưng vẫn lưu trong Audit Log kèm lý do để đối soát thuế.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex justify-end pt-2 border-t border-[#ECD8F2]">
+        <button onclick="toggleMissingDataPolicyModal()" class="px-5 py-2 bg-[#8F60BF] hover:bg-[#7b4fa8] text-white rounded-xl text-xs font-bold transition">
+          Đã Hiểu & Đóng
+        </button>
+      </div>
+    </div>
+  </div>
+
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- JAVASCRIPT ĐIỀU HÀNH HỆ THỐNG HOÀN CHỈNH -->
+  <!-- ======================================================== -->
+  <script>
+    // Định dạng tiền tệ VND đồng nhất toàn ứng dụng
+    function formatVND(amount) {
+      if (amount === null || amount === undefined || isNaN(amount)) return "0 ₫";
+      const num = Number(amount);
+      const isNegative = num < 0;
+      const formatted = Math.abs(Math.round(num)).toLocaleString('vi-VN');
+      return (isNegative ? '-' : '') + formatted + ' ₫';
+    }
+
+    // Trạng thái phê duyệt kiểm toán
+    let isCleansingApproved = false;
+
+    // Thiết lập câu góp ý mẫu nhanh
+    function setQuickFeedback(text) {
+      const input = document.getElementById('user-cleansing-feedback');
+      if (input) input.value = text;
+    }
+
+    // Xử lý khi người dùng gửi yêu cầu góp ý/sửa đổi cho AI Agent
+    function handleSendFeedbackToAgent() {
+      const input = document.getElementById('user-cleansing-feedback');
+      const val = input ? input.value.trim() : '';
+      if (!val) {
+        alert("Vui lòng nhập nội dung góp ý hoặc chỉ thị sửa đổi trước khi gửi cho Agent!");
+        return;
+      }
+
+      const respBox = document.getElementById('agent-feedback-response-box');
+      const respText = document.getElementById('agent-feedback-response-text');
+      
+      // Giả lập AI Agent phân tích ý kiến người dùng và cập nhật phương án
+      let adjustedAction = "";
+      if (val.toLowerCase().includes("0đ") || val.toLowerCase().includes("quà tặng")) {
+        adjustedAction = `Agent đã ghi nhận chỉ thị: "[${val}]". Hệ thống sẽ giữ nguyên 14 đơn hàng 0đ quà tặng đối tác, chỉ gắn cờ kiểm toán FLAG_GIFT_ORDER và không tính vào chi phí gian lận. Đã cập nhật lại bảng đề xuất. Bạn có thể nhấn 'Đồng Ý & Phê Duyệt Để Tiếp Tục'.`;
+        const tag3 = document.getElementById('status-tag-3');
+        if (tag3) tag3.textContent = "Đã chỉnh sửa";
+        const sugg3 = document.getElementById('suggest-text-3');
+        if (sugg3) sugg3.textContent = "Chỉ cách ly đơn bot gian lận; giữ lại các đơn 0đ quà tặng theo chỉ thị người dùng.";
+      } else if (val.toLowerCase().includes("70/30") || val.toLowerCase().includes("tỷ lệ")) {
+        adjustedAction = `Agent đã tiếp thu: "[${val}]". Đã cấu hình lại ma trận phân bổ: Kênh chốt đơn hưởng 70% giá trị, kênh tạo nhận thức hưởng 30%. Doanh thu sau khử trùng lặp đã được tính toán lại theo trọng số mới. Bạn có thể bấm Phê duyệt ngay.`;
+        const tag4 = document.getElementById('status-tag-4');
+        if (tag4) tag4.textContent = "Đã chỉnh sửa";
+        const sugg4 = document.getElementById('suggest-text-4');
+        if (sugg4) sugg4.textContent = "Phân bổ trọng số 70/30 theo chỉ thị người quản trị dữ liệu.";
+      } else {
+        adjustedAction = `Agent đã tiếp thu yêu cầu: "[${val}]". Các tham số tính toán và quy tắc làm sạch đã được hiệu chỉnh tương ứng trong Audit Log. Vui lòng bấm 'Đồng Ý & Phê Duyệt Để Tiếp Tục'.`;
+      }
+
+      if (respBox && respText) {
+        respText.textContent = adjustedAction;
+        respBox.classList.remove('hidden');
+      }
+
+      // Đẩy luôn vào Chatbox của Copilot để đồng bộ lịch sử
+      const agentBox = document.getElementById('agent-chat-box');
+      if (agentBox) {
+        agentBox.insertAdjacentHTML('beforeend', `
+          <div class="flex justify-end">
+            <div class="bg-[#8F60BF] text-white p-2.5 rounded-2xl rounded-tr-none max-w-xs shadow-xs text-xs">
+              <strong>Chỉ thị tại Bước 2:</strong> ${val}
+            </div>
+          </div>
+          <div class="flex items-start space-x-2">
+            <div class="w-6 h-6 rounded-full bg-[#8F60BF] text-white flex items-center justify-center font-bold text-[10px] flex-shrink-0">
+              V
+            </div>
+            <div class="bg-white p-2.5 rounded-2xl rounded-tl-none border border-[#ECD8F2] text-[#1E1233] leading-relaxed shadow-xs text-xs max-w-xs">
+              ${adjustedAction}
+            </div>
+          </div>
+        `);
+        agentBox.scrollTop = agentBox.scrollHeight;
+      }
+    }
+
+    function toggleMissingDataPolicyModal() {
+      const modal = document.getElementById('missing-data-modal');
+      if (modal) modal.classList.toggle('hidden');
+    }
+
+    // 1. Quản lý Điều Hướng Chính (Hero & 5 Bước)
+    function startWorkflowAtStep1() {
+      const hero = document.getElementById('view-hero');
+      const ws = document.getElementById('view-workspace');
+      if (hero) hero.classList.add('hidden');
+      if (ws) {
+        ws.classList.remove('hidden');
+        ws.scrollIntoView({ behavior: 'smooth' });
+      }
+      switchStep(1);
+    }
+
+    function jumpToStep5Report() {
+      // Cho phép xem thẳng Báo cáo Bước 5 khi bấm từ Bìa Hero
+      isCleansingApproved = true;
+      const pill = document.getElementById('cleansing-status-pill');
+      if (pill) {
+        pill.innerHTML = `<i class="fa-solid fa-circle-check text-[#079DD9]"></i><span>ĐÃ ĐƯỢC PHÊ DUYỆT</span>`;
+        pill.className = "px-3 py-1 rounded-full text-xs font-bold bg-[#ECD8F2] text-[#8F60BF] border border-[#8F60BF] flex items-center space-x-1.5";
+      }
+      const hero = document.getElementById('view-hero');
+      const ws = document.getElementById('view-workspace');
+      if (hero) hero.classList.add('hidden');
+      if (ws) {
+        ws.classList.remove('hidden');
+        ws.scrollIntoView({ behavior: 'smooth' });
+      }
+      switchStep(5);
+    }
+
+    function backToHero() {
+      const hero = document.getElementById('view-hero');
+      const ws = document.getElementById('view-workspace');
+      if (hero) hero.classList.remove('hidden');
+      if (ws) ws.classList.add('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function switchStep(stepNum) {
+      // Chốt chặn kiểm tra: Nếu muốn sang Bước 3, 4 hoặc 5 từ quy trình mà chưa duyệt làm sạch ở Bước 2
+      if (stepNum >= 3 && !isCleansingApproved) {
+        alert("CHỐT CHẶN BẢO VỆ DỮ LIỆU:\n\nBạn chưa phê duyệt phương án chuẩn hoá ở Bước 2. Vui lòng đọc kỹ khảo sát và bấm 'Phê Duyệt & Cho Phép Agent Tiếp Tục' trước khi đi tiếp!");
+        switchStep(2);
+        return;
+      }
+
+      for (let i = 1; i <= 5; i++) {
+        const panel = document.getElementById(`step-panel-${i}`);
+        const nav = document.getElementById(`step-nav-${i}`);
+        if (panel) panel.classList.add('hidden');
+        if (nav) {
+          nav.className = "w-full text-left p-3 rounded-2xl flex items-center justify-between border transition bg-white border-[#ECD8F2] hover:border-[#8F60BF]";
+        }
+      }
+
+      const activePanel = document.getElementById(`step-panel-${stepNum}`);
+      const activeNav = document.getElementById(`step-nav-${stepNum}`);
+      if (activePanel) activePanel.classList.remove('hidden');
+      if (activeNav) {
+        activeNav.className = "w-full text-left p-3 rounded-2xl flex items-center justify-between border transition bg-[#ECD8F2] border-[#8F60BF] shadow-sm";
+      }
+
+      if (stepNum === 5) {
+        setTimeout(() => { initOrUpdateCharts(); }, 150);
+      }
+    }
+
+    // 2. Chức năng Phê duyệt Chuẩn hoá Dữ liệu (Human-in-the-Loop tại Bước 2)
+    function approveCleansingPlan() {
+      isCleansingApproved = true;
+
+      // Cập nhật giao diện nút trạng thái
+      const pill = document.getElementById('cleansing-status-pill');
+      if (pill) {
+        pill.innerHTML = `<i class="fa-solid fa-circle-check text-[#079DD9]"></i><span>ĐÃ ĐƯỢC PHÊ DUYỆT</span>`;
+        pill.className = "px-3 py-1 rounded-full text-xs font-bold bg-[#ECD8F2] text-[#8F60BF] border border-[#8F60BF] flex items-center space-x-1.5";
+      }
+
+      // Ẩn hộp thao tác duyệt và hiện banner hoàn tất
+      const actionBox = document.getElementById('cleansing-action-box');
+      const approvedBanner = document.getElementById('cleansing-approved-banner');
+      if (actionBox) actionBox.classList.add('hidden');
+      if (approvedBanner) approvedBanner.classList.remove('hidden');
+
+      // Mở khóa nút tiếp tục
+      const btnProceed = document.getElementById('btn-proceed-step3');
+      const lockIcon = document.getElementById('lock-icon-step3');
+      if (btnProceed) {
+        btnProceed.disabled = false;
+        btnProceed.classList.remove('cursor-not-allowed', 'opacity-70', 'bg-[#BEB6F2]');
+        btnProceed.classList.add('bg-[#8F60BF]', 'hover:bg-[#7b4fa8]', 'shadow-sm');
+      }
+      if (lockIcon) {
+        lockIcon.className = "fa-solid fa-arrow-right text-xs";
+      }
+
+      alert("XÁC NHẬN PHÊ DUYỆT THÀNH CÔNG!\n\n• 142 lỗi định dạng đã được chuẩn hoá về ISO-8601.\n• 48 đơn lệch số học đã được cân bằng lại.\n• 62 đơn spam bot/đơn ảo đã được cách ly.\n• 298.13M ₫ doanh thu trùng lặp đã được bóc tách.\n\nAI Agent đã được cấp quyền chuyển sang Bước 3!");
+    }
+
+    function rejectCleansingPlan() {
+      alert("Bạn đã chọn từ chối phương án chuẩn hoá tự động. Dữ liệu sẽ được lưu giữ nguyên trạng để kiểm toán thủ công.");
+    }
+
+    function handleProceedToStep3() {
+      if (!isCleansingApproved) {
+        alert("Vui lòng phê duyệt phương án chuẩn hoá trước khi tiếp tục!");
+        return;
+      }
+      switchStep(3);
+    }
+
+    function switchSubTab(tabIdx) {
+      for (let i = 1; i <= 5; i++) {
+        const btn = document.getElementById(`subtab-${i}`);
+        if (btn) {
+          btn.className = (i === tabIdx) ? "pb-3 subtab-active" : "pb-3 subtab-inactive";
+        }
+      }
+      if (tabIdx === 1) {
+        document.getElementById('step-panel-5')?.scrollIntoView({ behavior: 'smooth' });
+      } else if (tabIdx === 2) {
+        document.getElementById('pnl-table-body')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else if (tabIdx === 3) {
+        document.getElementById('chart-waterfall')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else if (tabIdx === 4) {
+        document.getElementById('badge-hitl2')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else if (tabIdx === 5) {
+        toggleMissingDataPolicyModal();
+      }
+    }
+
+    function downloadSampleDatasetCSV() {
+      const a = document.createElement('a');
+      a.href = 'sample_data.csv';
+      a.download = 'Vitara_Sample_Dataset_Chuoi_Ban_Le.csv';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
+    function handleFileSelected(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const content = e.target.result || '';
+        const lines = content.split(/\r\n|\n/).filter(line => line.trim().length > 0);
+        const rowCount = Math.max(lines.length - 1, 1);
+
+        const alertBox = document.getElementById('format-alert-box');
+        if (alertBox) {
+          alertBox.classList.remove('hidden');
+          alertBox.className = "p-4 rounded-2xl bg-[#ECD8F2] border border-[#8F60BF] text-xs text-[#1E1233] leading-relaxed transition-all mb-4";
+          alertBox.innerHTML = `
+            <div class="flex items-center space-x-2 font-bold text-[#8F60BF] mb-1">
+              <i class="fa-solid fa-circle-check text-[#079DD9]"></i>
+              <span>ĐÃ NẠP THÀNH CÔNG TỆP: <strong>${file.name}</strong></span>
+            </div>
+            <p class="text-[11px] text-[#6E5D80]">
+              Hệ thống nhận diện <strong>${rowCount} dòng giao dịch đối soát</strong>. AI Agent đã hoàn tất quét khảo sát chất lượng và phân loại 4 nhóm lỗi cần phê duyệt tại Bước 2.
+            </p>
+          `;
+        }
+        alert(`ĐÃ NẠP THÀNH CÔNG TỆP: ${file.name}\n\n• Quy mô: ${rowCount} dòng dữ liệu đối soát.\n• Tự động chuyển sang Bước 2 để kiểm toán chất lượng & phê duyệt kế hoạch làm sạch!`);
+        switchStep(2);
+      };
+      reader.readAsText(file.slice(0, 1024 * 1024));
+    }
+
+    function handleConnectExternalSource() {
+      const input = document.getElementById('input-api-url');
+      const url = input ? input.value.trim() : '';
+      if (!url) {
+        alert('Vui lòng nhập đường dẫn URL bảng tính Google Sheets hoặc POS API endpoint hợp lệ!');
+        return;
+      }
+      alert(`Đã kết nối thành công với nguồn dữ liệu ngoài: ${url}\nĐang đồng bộ giao dịch vào hệ thống...`);
+      switchStep(2);
+    }
+
+    function handleExportReportCSV() {
+      let csv = "\uFEFF"; // UTF-8 BOM cho Microsoft Excel tiếng Việt
+      csv += "Chỉ tiêu tài chính,Kênh Flash Sale,Kênh Khai Xuân,Kênh Combo VIP,Kênh Livestream,Toàn hệ thống\n";
+      csv += "1. Doanh thu báo cáo cũ (Trùng),297950000,245200000,182500000,172060000,897710000\n";
+      csv += "2. Doanh thu sau khử trùng lặp,173495000,210400000,112450000,103235000,599580000\n";
+      csv += "3. Chiết khấu ưu đãi (-),-33319500,-24500000,-12500000,-14200000,-84519500\n";
+      csv += "4. Hoàn trả ròng sau quét (-),-31722000,-21500000,-14200000,-17745000,-85167000\n";
+      csv += "5. Doanh thu thuần thực tế (=),108453500,164400000,85750000,71290000,429893500\n";
+      csv += "6. Giá vốn COGS (-),-87003000,-82200000,-42875000,-39209500,-251287500\n";
+      csv += "7. Lợi nhuận gộp (=),21450500,82200000,42875000,32080500,178606000\n";
+      csv += "8. Chi phí trực tiếp (-),-45000000,-28000000,-18500000,-22000000,-113500000\n";
+      csv += "9. Chi phí chung phân bổ (-),-23149000,-24200000,-16500000,-16151000,-80000000\n";
+      csv += "10. Lợi nhuận ròng (Net Contribution),-46698500,30000000,7875000,-6070500,-14894000\n";
+      csv += "11. Net Margin %,-43.1%,18.3%,9.2%,-8.5%,-3.5%\n";
+      csv += "12. ROI %,-68.5%,22.3%,10.1%,-7.9%,-1.1%\n";
+      csv += "Khuyến nghị quyết định,STOP (Cắt lỗ),CONTINUE (Tăng vốn),ADJUST (Tối ưu),ADJUST (Đàm phán KOC),Điều chuyển 48M sang Khai Xuân\n";
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `Vitara_Executive_PnL_Report_${new Date().toISOString().slice(0,10)}.csv`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    function applyIndustryPreset(preset) {
+      const badge = document.getElementById('sla-display-badge');
+      if (!badge) return;
+      const presets = {
+        retail: "SLA 12d nội bộ → Quét 30d AI",
+        fnb: "SLA 3d nội bộ → Quét 7d AI",
+        fashion: "SLA 7d nội bộ → Quét 14d AI",
+        ecommerce: "SLA 15d sàn → Quét 30d AI",
+        custom: "SLA Tùy chỉnh người dùng"
+      };
+      badge.textContent = presets[preset] || presets.retail;
+    }
+    // 2. Khởi Tạo 6 Loại Biểu Đồ (Bao Gồm Cả Waterfall Chart)
+    let chartsObj = {};
+
+    function initOrUpdateCharts() {
+      if (typeof Chart === 'undefined') return;
+
+      // 0. Biểu đồ Thác Nước (Profit Waterfall Chart) dùng Floating Bar Chart của Chart.js
+      const ctxWaterfall = document.getElementById('chart-waterfall');
+      if (ctxWaterfall) {
+        if (chartsObj.waterfall) chartsObj.waterfall.destroy();
+        chartsObj.waterfall = new Chart(ctxWaterfall, {
+          type: 'bar',
+          data: {
+            labels: [
+              '1. Doanh thu thô ban đầu',
+              '2. Bóc tách doanh thu trùng (-)',
+              '3. Chiết khấu voucher (-)',
+              '4. Đổi trả trễ sau quét (-)',
+              '5. Giá vốn COGS (-)',
+              '6. Chi phí Marketing (-)',
+              '7. Chi phí chung phân bổ (-)',
+              '8. Lợi nhuận ròng thực tế'
+            ],
+            datasets: [{
+              label: 'Dòng tiền (Triệu ₫)',
+              // Dạng floating bar [start, end]
+              data: [
+                [0, 897.71],       // Doanh thu thô
+                [599.58, 897.71],   // Giảm 298.13M doanh thu trùng
+                [515.06, 599.58],   // Giảm 84.52M chiết khấu
+                [429.89, 515.06],   // Giảm 85.17M hoàn trả
+                [178.61, 429.89],   // Giảm 251.28M COGS
+                [65.11, 178.61],    // Giảm 113.5M chi phí trực tiếp
+                [-14.89, 65.11],    // Giảm 80M chi phí chung
+                [0, -14.89]         // Lợi nhuận ròng thực tế: -14.89M
+              ],
+              backgroundColor: [
+                '#079DD9', // Doanh thu thô ban đầu
+                '#8F60BF', // Trùng lặp
+                '#BEB6F2', // Chiết khấu
+                '#8F60BF', // Hoàn trả
+                '#BEB6F2', // COGS
+                '#99D9F2', // Chi phí trực tiếp
+                '#ECD8F2', // Chi phí chung
+                '#8F60BF'  // Lợi nhuận ròng âm
+              ],
+              borderRadius: 6,
+              borderWidth: 1,
+              borderColor: '#FAF6FC'
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                callbacks: {
+                  label: function(context) {
+                    const val = context.raw;
+                    const diff = Math.abs(val[1] - val[0]).toFixed(2);
+                    return `Mức tác động: ${diff} Tr ₫ (Dải: ${val[0]} → ${val[1]} Tr ₫)`;
+                  }
+                }
+              }
+            },
+            scales: {
+              y: { 
+                ticks: { callback: v => v + ' Tr ₫' },
+                grid: { color: '#ECD8F2' }
+              },
+              x: { 
+                grid: { display: false },
+                ticks: { font: { size: 10, weight: 600 } }
+              }
+            }
+          }
+        });
+      }
+
+      // 1. Line & Area Chart: Doanh thu thô vs. Doanh thu sạch
+      const ctxLine = document.getElementById('chart-revenue-trend');
+      if (ctxLine) {
+        if (chartsObj.revenueTrend) chartsObj.revenueTrend.destroy();
+        chartsObj.revenueTrend = new Chart(ctxLine, {
+          type: 'line',
+          data: {
+            labels: ['01/25', '02/25', '03/25', '04/25', '05/25', '06/25', '07/25', '08/25', '09/25', '10/25', '11/25', '12/25'],
+            datasets: [
+              {
+                label: 'Doanh thu thô (Bị cộng trùng)',
+                data: [72, 75, 78, 82, 85, 80, 78, 74, 70, 68, 65, 50.7],
+                borderColor: '#8F60BF',
+                backgroundColor: 'rgba(143, 96, 191, 0.08)',
+                borderDash: [5, 5],
+                fill: true,
+                tension: 0.35,
+                pointRadius: 3
+              },
+              {
+                label: 'Doanh thu thực sau làm sạch',
+                data: [48, 51, 53, 56, 58, 54, 52, 49, 46, 44, 42, 40.3],
+                borderColor: '#079DD9',
+                backgroundColor: 'rgba(7, 157, 217, 0.15)',
+                fill: true,
+                tension: 0.35,
+                pointRadius: 4,
+                pointBackgroundColor: '#079DD9'
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { position: 'top', labels: { boxWidth: 12, font: { size: 10 } } }
+            },
+            scales: {
+              y: { ticks: { callback: v => v + ' Tr' }, grid: { color: '#ECD8F2' } },
+              x: { grid: { display: false } }
+            }
+          }
+        });
+      }
+
+      // 2. Donut Chart: Cơ cấu chi phí vận hành
+      const ctxDonut = document.getElementById('chart-cost-structure');
+      if (ctxDonut) {
+        if (chartsObj.costStructure) chartsObj.costStructure.destroy();
+        chartsObj.costStructure = new Chart(ctxDonut, {
+          type: 'doughnut',
+          data: {
+            labels: ['Kênh Cửa Hàng (In-Store)', 'Website & D2C', 'Sàn TMĐT & Livestream', 'Chi phí chung phân bổ'],
+            datasets: [{
+              data: [48.8, 31.3, 19.9, 25.0],
+              backgroundColor: ['#8F60BF', '#079DD9', '#99D9F2', '#BEB6F2'],
+              borderWidth: 2,
+              borderColor: '#ffffff'
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { position: 'right', labels: { boxWidth: 12, font: { size: 10 } } }
+            },
+            cutout: '68%'
+          }
+        });
+      }
+
+      // 3. Stacked Bar Chart: Khấu trừ thuần, voucher & hoàn trả
+      const ctxStacked = document.getElementById('chart-stacked-breakdown');
+      if (ctxStacked) {
+        if (chartsObj.stackedBreakdown) chartsObj.stackedBreakdown.destroy();
+        chartsObj.stackedBreakdown = new Chart(ctxStacked, {
+          type: 'bar',
+          data: {
+            labels: ['Flash Sale', 'Khai Xuân', 'Combo VIP', 'Livestream'],
+            datasets: [
+              {
+                label: 'Doanh thu thuần thực tế',
+                data: [108.4, 164.4, 85.7, 71.3],
+                backgroundColor: '#079DD9'
+              },
+              {
+                label: 'Chiết khấu Voucher',
+                data: [33.3, 24.5, 12.5, 14.2],
+                backgroundColor: '#BEB6F2'
+              },
+              {
+                label: 'Hoàn trả sau quét',
+                data: [31.7, 21.5, 14.2, 17.7],
+                backgroundColor: '#8F60BF'
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              x: { stacked: true, grid: { display: false } },
+              y: { stacked: true, ticks: { callback: v => v + ' Tr' }, grid: { color: '#ECD8F2' } }
+            },
+            plugins: {
+              legend: { position: 'top', labels: { boxWidth: 12, font: { size: 10 } } }
+            }
+          }
+        });
+      }
+
+      // 4. Horizontal Bar Chart: So sánh lợi nhuận ròng
+      const ctxHoriz = document.getElementById('chart-horizontal-profit');
+      if (ctxHoriz) {
+        if (chartsObj.horizontalProfit) chartsObj.horizontalProfit.destroy();
+        chartsObj.horizontalProfit = new Chart(ctxHoriz, {
+          type: 'bar',
+          data: {
+            labels: ['Flash Sale', 'Khai Xuân', 'Combo VIP', 'Livestream'],
+            datasets: [{
+              label: 'Lợi nhuận ròng (Net Contribution - Triệu ₫)',
+              data: [-46.7, 30.0, 7.8, -6.1],
+              backgroundColor: ['#8F60BF', '#079DD9', '#99D9F2', '#BEB6F2'],
+              borderRadius: 8
+            }]
+          },
+          options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false }
+            },
+            scales: {
+              x: { ticks: { callback: v => v + ' Tr' }, grid: { color: '#ECD8F2' } },
+              y: { grid: { display: false } }
+            }
+          }
+        });
+      }
+
+      // 5. Bubble Correlation Chart: Tương quan Marketing x Lợi nhuận x Hoàn trả
+      const ctxBubble = document.getElementById('chart-bubble-correlation');
+      if (ctxBubble) {
+        if (chartsObj.bubbleCorrelation) chartsObj.bubbleCorrelation.destroy();
+        chartsObj.bubbleCorrelation = new Chart(ctxBubble, {
+          type: 'bubble',
+          data: {
+            datasets: [
+              {
+                label: 'Kênh Flash Sale (STOP)',
+                data: [{ x: 45, y: -46.7, r: 18 }], // x: Marketing Cost, y: Net Profit, r: Return Rate
+                backgroundColor: 'rgba(143, 96, 191, 0.7)',
+                borderColor: '#8F60BF'
+              },
+              {
+                label: 'Kênh Khai Xuân (CONTINUE)',
+                data: [{ x: 28, y: 30.0, r: 10 }],
+                backgroundColor: 'rgba(7, 157, 217, 0.7)',
+                borderColor: '#079DD9'
+              },
+              {
+                label: 'Kênh Combo VIP (ADJUST)',
+                data: [{ x: 18.5, y: 7.8, r: 9 }],
+                backgroundColor: 'rgba(153, 217, 242, 0.8)',
+                borderColor: '#079DD9'
+              },
+              {
+                label: 'Kênh Livestream (ADJUST)',
+                data: [{ x: 22, y: -6.1, r: 14 }],
+                backgroundColor: 'rgba(190, 182, 242, 0.8)',
+                borderColor: '#8F60BF'
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { position: 'top', labels: { boxWidth: 12, font: { size: 10 } } }
+            },
+            scales: {
+              x: { title: { display: true, text: 'Chi phí Marketing trực tiếp (Triệu ₫)', font: { size: 10 } }, grid: { color: '#ECD8F2' } },
+              y: { title: { display: true, text: 'Lợi nhuận ròng Net Contribution (Triệu ₫)', font: { size: 10 } }, grid: { color: '#ECD8F2' } }
+            }
+          }
+        });
+      }
+    }
+
+    function loadSampleRetailDirect() {
+      const alertBox = document.getElementById('format-alert-box');
+      if (alertBox) {
+        alertBox.classList.remove('hidden');
+        alertBox.className = "p-4 rounded-2xl bg-[#ECD8F2] border border-[#8F60BF] text-xs text-[#1E1233] leading-relaxed transition-all mb-4";
+        alertBox.innerHTML = `
+          <div class="flex items-center space-x-2 font-bold text-[#8F60BF] mb-1">
+            <i class="fa-solid fa-circle-check text-[#079DD9]"></i>
+            <span>ĐÃ NẠP BỘ DỮ LIỆU MẪU CHUỖI BÁN LẺ (15.000 DÒNG GIAO DỊCH)</span>
+          </div>
+          <p class="text-[11px] text-[#6E5D80]">
+            Mô phỏng 4 kênh bán lẻ: Flash Sale, Khai Xuân, Combo VIP, Livestream. Dữ liệu đã sẵn sàng để kiểm toán và phê duyệt chuẩn hoá tại Bước 2.
+          </p>
+        `;
+      }
+      alert("ĐÃ NẠP BỘ DỮ LIỆU MẪU THÀNH CÔNG!\n\n• Quy mô: 15.000 giao dịch đa kênh.\n• Tự động chuyển sang Bước 2 để kiểm tra 4 nhóm lỗi dữ liệu & tiến hành phê duyệt chuẩn hoá (HITL).");
+      switchStep(2);
+    }
+
+    function approveHitl1AndNext() {
+      alert("Đã duyệt quy tắc phân bổ tại Chốt Chặn HITL #1. Mở màn hình Bước 5 (Báo cáo kinh doanh).");
+      switchStep(5);
+    }
+
+    function handleApproveHitl2() {
+      const amt = document.getElementById('input-hitl2-amount').value;
+      const b = document.getElementById('badge-hitl2');
+      if (b) {
+        b.textContent = "APPROVED (ĐÃ KÝ DUYỆT)";
+        b.className = "px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#ECD8F2] text-[#8F60BF] border border-[#BEB6F2]";
+      }
+      alert(`Đã ký duyệt điều chuyển thành công ${formatVND(amt)} từ Kênh Flash Sale sang Kênh Khai Xuân! Kế hoạch tối ưu P&L đã được lưu.`);
+    }
+
+    function handleResetWorkflow() {
+      location.reload();
+    }
+
+    function toggleAgentDrawer() {
+      document.getElementById('agent-drawer').classList.toggle('translate-x-full');
+    }
+
+    function recalculateStep4() {
+      const s = document.getElementById('slider-return-days');
+      const d = document.getElementById('display-return-days');
+      if (s && d) d.textContent = s.value + " ngày";
+      renderAllTables();
+    }
+
+    function renderAllTables() {
+      const pnlBody = document.getElementById('pnl-table-body');
+      const pnlData = {
+        K1: { naive: 297950000, clean: 173495000, disc: 33319500, ret: 31722000, netRev: 108453500, cogs: 87003000, gross: 21450500, dirCost: 45000000, ovh: 23149000, netContrib: -46698500, margin: -43.06, roi: -68.52 },
+        K2: { naive: 245200000, clean: 210400000, disc: 24500000, ret: 21500000, netRev: 164400000, cogs: 82200000, gross: 82200000, dirCost: 28000000, ovh: 24200000, netContrib: 30000000, margin: 18.25, roi: 22.32 },
+        K3: { naive: 182500000, clean: 112450000, disc: 12500000, ret: 14200000, netRev: 85750000, cogs: 42875000, gross: 42875000, dirCost: 18500000, ovh: 16500000, netContrib: 7875000, margin: 9.18, roi: 10.11 },
+        K4: { naive: 172060000, clean: 103235000, disc: 14200000, ret: 17745000, netRev: 71290000, cogs: 39209500, gross: 32080500, dirCost: 22000000, ovh: 16151000, netContrib: -6070500, margin: -8.52, roi: -7.85 }
+      };
+
+      const keys = ['K1', 'K2', 'K3', 'K4'];
+      const tot = {
+        naive: keys.reduce((s, k) => s + pnlData[k].naive, 0),
+        clean: keys.reduce((s, k) => s + pnlData[k].clean, 0),
+        disc: keys.reduce((s, k) => s + pnlData[k].disc, 0),
+        ret: keys.reduce((s, k) => s + pnlData[k].ret, 0),
+        netRev: keys.reduce((s, k) => s + pnlData[k].netRev, 0),
+        cogs: keys.reduce((s, k) => s + pnlData[k].cogs, 0),
+        gross: keys.reduce((s, k) => s + pnlData[k].gross, 0),
+        dirCost: keys.reduce((s, k) => s + pnlData[k].dirCost, 0),
+        ovh: 80000000,
+        netContrib: keys.reduce((s, k) => s + pnlData[k].netContrib, 0)
+      };
+
+      if (pnlBody) {
+        const rows = [
+          { label: "1. Doanh thu báo cáo cũ (Trùng)", f: 'naive', c: "text-[#6E5D80]" },
+          { label: "2. Doanh thu sau khử trùng lặp", f: 'clean', c: "font-semibold text-[#1E1233]" },
+          { label: "3. Chiết khấu ưu đãi (-)", f: 'disc', format: v => `-${formatVND(v)}`, c: "text-[#6E5D80]" },
+          { label: "4. Hoàn trả ròng sau quét (-)", f: 'ret', format: v => `-${formatVND(v)}`, c: "text-[#8F60BF]" },
+          { label: "5. Doanh thu thuần thực tế (=)", f: 'netRev', c: "font-bold text-[#8F60BF] bg-[#ECD8F2]" },
+          { label: "6. Giá vốn COGS (-)", f: 'cogs', format: v => `-${formatVND(v)}`, c: "text-[#6E5D80]" },
+          { label: "7. Lợi nhuận gộp (=)", f: 'gross', c: "font-semibold text-[#1E1233]" },
+          { label: "8. Chi phí trực tiếp (-)", f: 'dirCost', format: v => `-${formatVND(v)}`, c: "text-[#6E5D80]" },
+          { label: "9. Chi phí chung phân bổ (-)", f: 'ovh', format: v => `-${formatVND(v)}`, c: "text-[#6E5D80]" },
+          { 
+            label: "10. Lợi nhuận ròng (Net Contribution)", 
+            custom: k => `<span class="${pnlData[k].netContrib >= 0 ? 'text-[#079DD9]' : 'text-[#8F60BF]'} font-bold">${formatVND(pnlData[k].netContrib)}</span>`,
+            customTot: `<span class="${tot.netContrib >= 0 ? 'text-[#079DD9]' : 'text-[#8F60BF]'} font-bold">${formatVND(tot.netContrib)}</span>`,
+            c: "font-bold text-sm bg-[#FAF6FC]"
+          },
+          {
+            label: "11. Net Margin %",
+            custom: k => `<span class="${pnlData[k].margin >= 0 ? 'text-[#079DD9]' : 'text-[#8F60BF]'} font-bold">${pnlData[k].margin.toFixed(1)}%</span>`,
+            customTot: `<span class="font-bold text-[#8F60BF]">${((tot.netContrib / tot.netRev) * 100).toFixed(1)}%</span>`,
+            c: "font-medium"
+          },
+          {
+            label: "12. Tỷ suất ROI %",
+            custom: k => `<span class="${pnlData[k].roi >= 0 ? 'text-[#079DD9]' : 'text-[#8F60BF]'} font-bold">${pnlData[k].roi.toFixed(1)}%</span>`,
+            customTot: `<span class="font-bold text-[#1E1233]">-1.1%</span>`,
+            c: "font-medium"
+          }
+        ];
+
+        pnlBody.innerHTML = rows.map(r => `
+          <tr class="${r.c || ''} hover:bg-[#FAF6FC]">
+            <td class="p-2.5 font-sans">${r.label}</td>
+            ${keys.map(k => `
+              <td class="p-2.5 text-right font-mono">
+                ${r.custom ? r.custom(k) : (r.format ? r.format(pnlData[k][r.f]) : formatVND(pnlData[k][r.f]))}
+              </td>
+            `).join('')}
+            <td class="p-2.5 text-right font-mono font-bold bg-[#FAF6FC]">
+              ${r.customTot ? r.customTot : (r.format ? r.format(tot[r.f]) : formatVND(tot[r.f]))}
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      const s3Body = document.getElementById('step3-table-body');
+      if (s3Body) {
+        const s3Data = [
+          { name: "Kênh Flash Sale", naive: 297950000, orders: 106, oldRet: 11420000, lateRet: 27760000, totRet: 39180000 },
+          { name: "Kênh Khai Xuân", naive: 245200000, orders: 84, oldRet: 9800000, lateRet: 18200000, totRet: 28000000 },
+          { name: "Kênh Combo VIP", naive: 182500000, orders: 62, oldRet: 4200000, lateRet: 12100000, totRet: 16300000 },
+          { name: "Kênh Livestream", naive: 172060000, orders: 58, oldRet: 4040000, lateRet: 14510000, totRet: 18550000 }
+        ];
+        s3Body.innerHTML = s3Data.map(r => `
+          <tr>
+            <td class="p-3 font-bold font-sans">${r.name}</td>
+            <td class="p-3 text-right">${formatVND(r.naive)}</td>
+            <td class="p-3 text-right">${r.orders} đơn</td>
+            <td class="p-3 text-right text-[#6E5D80]">${formatVND(r.oldRet)}</td>
+            <td class="p-3 text-right font-bold text-[#8F60BF]">+${formatVND(r.lateRet)}</td>
+            <td class="p-3 text-right font-bold text-[#1E1233]">${formatVND(r.totRet)}</td>
+          </tr>
+        `).join('');
+      }
+
+      const auditBody4 = document.getElementById('step4-audit-body');
+      const auditBody5 = document.getElementById('audit-trail-tbody');
+      const samples = [
+        { id: "ORD_RT_8801", ch: "Website D2C", val: 1850000, camps: "Flash Sale, Combo VIP", w: "50% / 50%", st: "Trả trễ (Ngày 24)" },
+        { id: "ORD_RT_8802", ch: "Cửa hàng In-Store", val: 3200000, camps: "Khai Xuân", w: "100%", st: "Thành công (0 trả)" },
+        { id: "ORD_RT_8803", ch: "Sàn TMĐT", val: 2450000, camps: "Flash Sale, Livestream", w: "40% / 60%", st: "Trả trễ (Ngày 19)" },
+        { id: "ORD_RT_8804", ch: "Cửa hàng In-Store", val: 950000, camps: "Khai Xuân, Combo VIP", w: "50% / 50%", st: "Thành công (0 trả)" }
+      ];
+
+      const auditHtml = samples.map(a => `
+        <tr>
+          <td class="p-2.5 font-bold text-[#8F60BF]">${a.id}</td>
+          <td class="p-2.5 font-sans">${a.ch}</td>
+          <td class="p-2.5 text-right font-bold">${formatVND(a.val)}</td>
+          <td class="p-2.5">${a.camps}</td>
+          <td class="p-2.5 text-right text-[#6E5D80]">${a.w}</td>
+          <td class="p-2.5 text-right font-sans ${a.st.includes('Trả') ? 'text-[#8F60BF] font-medium' : 'text-[#079DD9]'}">${a.st}</td>
+        </tr>
+      `).join('');
+
+      if (auditBody4) auditBody4.innerHTML = auditHtml;
+      if (auditBody5) auditBody5.innerHTML = auditHtml;
+    }
+
+    function handleAgentChat(e) {
+      e.preventDefault();
+      const inp = document.getElementById('agent-chat-input');
+      const val = inp.value.trim();
+      if (!val) return;
+      inp.value = "";
+      sendQuickAgent(val);
+    }
+
+    function sendQuickAgent(msg) {
+      const box = document.getElementById('agent-chat-box');
+      if (!box) return;
+
+      box.insertAdjacentHTML('beforeend', `
+        <div class="flex justify-end">
+          <div class="bg-[#8F60BF] text-white p-3 rounded-2xl rounded-tr-none max-w-xs shadow-sm">
+            ${msg}
+          </div>
+        </div>
+      `);
+      box.scrollTop = box.scrollHeight;
+
+      setTimeout(() => {
+        let reply = "";
+        if (msg.includes("Flash Sale") || msg.includes("STOP")) {
+          reply = `
+            <strong>Chẩn đoán chuyên sâu kênh Flash Sale:</strong><br>
+            • Doanh thu thô ban đầu: 297.95M ₫ (Đứng đầu chuỗi).<br>
+            • Bị cộng đè mã voucher: 124.45M ₫.<br>
+            • Trả trễ sau ngày quy định: 27.76M ₫.<br>
+            • Lỗ ròng thực tế: <strong>-46,698,500 ₫</strong>.<br>
+            &rarr; Khuyến nghị: Thực thi lệnh <strong>STOP</strong> ngay để ngắt dòng tiền âm.
+          `;
+        } else {
+          reply = `
+            <strong>Kế hoạch Điều chuyển Ngân sách Thông minh:</strong><br>
+            Thu hồi toàn bộ <strong>48,000,000 ₫</strong> chi phí marketing của kênh Flash Sale sang <strong>Kênh Khai Xuân</strong> (ROI 22.3%). Kế hoạch dự kiến đưa lợi nhuận chuỗi từ -14.89M lên <strong>+31.21M ₫</strong>.
+          `;
+        }
+
+        box.insertAdjacentHTML('beforeend', `
+          <div class="flex items-start space-x-2">
+            <div class="w-6 h-6 rounded-full bg-[#8F60BF] text-white flex items-center justify-center font-bold text-[10px] flex-shrink-0">
+              V
+            </div>
+            <div class="space-y-1 max-w-xs">
+              <div class="p-1 bg-[#ECD8F2] rounded text-[9px] font-mono text-[#8F60BF]">⚡ Vitara Tool: get_channel_pnl_breakdown()</div>
+              <div class="bg-white p-3 rounded-2xl rounded-tl-none border border-[#ECD8F2] text-[#1E1233] leading-relaxed shadow-sm">
+                ${reply}
+              </div>
+            </div>
+          </div>
+        `);
+        box.scrollTop = box.scrollHeight;
+      }, 400);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      renderAllTables();
+      initOrUpdateCharts();
+    });
+  </script>
+</body>
+</html>
